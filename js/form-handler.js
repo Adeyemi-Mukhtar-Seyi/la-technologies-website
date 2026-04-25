@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const message = document.getElementById("message")?.value;
 
     try {
-      const response = await fetch("/send", {
+      const response = await fetch("https://la-tech-backend.onrender.com/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
