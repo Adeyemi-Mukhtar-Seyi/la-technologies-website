@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+ 
+body{
+  background-repeat: no-repeat;
+  width: 100%;
+ /* background-repeat: no-repeat;
+ box-sizing: border-box;
+ width: 100%; */
+}
+
+body, html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Head Start */
+
+#navbar li a:hover,
+#navbar li a.active {
+  color: #f26522;
+}
+
+#navbar li a.active::after,
+#navbar li a:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background-color: #f26522;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}
+/*Navbar End*/
+
+#mobile {
+  display: none;
+  align-items: center;
+}
+
+#close {
+  display: none;
+}
+
+
+
+/* body::-webkit-scrollbar {
+  display: none;
+} */
+
+
+/* body {
+    background-repeat: no-repeat;
+    width: 100%;
+    position: relative;
+} */
+
+
+.about-cover {
+    text-align: center;
+    width: 100%;
+    height: 40vh;
+    padding: clamp(2rem, 5vw, 5rem);
+    background: rgb(0, 0, 0);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.about-cover h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-size: 30px;
+    margin-top: 2.5rem;
+}
+
+.about-cover h6{
+    font-size: 20px;
+    color: #f26522;
+}
+
+.about-cover a {
+    text-decoration: none;
+   color: #f26522;
+}
+
+.about-container img {
+    border-radius: 50%;
+    max-width: 5400px;
+    /* width: 50%;
+    height: auto; */
+}
+.about-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.about-container .about-content {
+    margin:0 0 0 1.5rem;
+  
+}
+
+.about-container .about-content p {
+    text-align: justify;
+}
+
+
+
+/**/
+
+
+.skills {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.skills h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+
+/* Accordion */
+.skill-group {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 10px;
+}
+
+.skill-group summary {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 15px 0;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+.skill-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.skill-group summary::after {
+  content: "▾";
+  position: absolute;
+  right: 0;
+  transition: transform 0.3s ease;
+}
+
+.skill-group[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Skill list */
+.skill-list {
+  list-style: none;
+  padding: 15px 0 20px;
+}
+
+.skill-list li {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed #ddd;
+  font-size: 15px;
+}
+
+/* Circular Progress */
+.progress {
+  --size: 52px;
+  width: var(--size);
+  height: var(--size);
+  min-width: 52px;
+  border-radius: 50%;
+  background:
+    conic-gradient(#1eb6ff var(--value), #eaeaea 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+
+  position: relative;
+  flex-shrink: 0;
+}
+
+.progress::before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.progress {
+  z-index: 1;
+}
+.progress span {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+
+@media (max-width:667px) {
+    /* #navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100vh;
+        width: 300px;
+        background-color: #E3E6F3;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+        padding: 80px 0 0 10px;
+        transition: 0.3s;
+    }
+
+    #navbar.active {
+        right: 0px;
+    } */
+
+    #navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    height: 100vh;
+    width: 300px;
+
+    background-color: #E3E6F3;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+    padding: 80px 0 0 10px;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  #navbar.active {
+    transform: translateX(0);
+  }
+
+    #navbar li {
+        margin-bottom: 25px;
+    }
+
+    #mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    #mobile i img {
+        color: #f26522;
+        font-size: 24px;
+        padding-left: 20px;
+    }
+
+    #close {
+        display: initial;
+        position: absolute;
+        top: 30px;
+        right: 250px;
+        color: #222;
+        font-size: 24px;
+    }
+
+    #bar {
+        color: #fff;
+    }
+
+
+    .about-container{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.about-container img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+.skill-content {
+  width: 80%;
+}
+
+.about-container .about-content p {
+   margin: 0, 0;
+}
+
+div.about-cover {
+  text-align: center;
+}
+
+div.contact-cover h1 {
+    line-height: normal;
+    font-size: 50px;
+    margin: 5rem 0.7rem 0.5rem 0.5rem;
+}
+
+
+div.contact-cover a  h6 {
+    text-decoration: none;
+    color: #2b2a2a;
+    font-size: 20px;
+    margin-bottom: 2.5rem;
+}
+
+}

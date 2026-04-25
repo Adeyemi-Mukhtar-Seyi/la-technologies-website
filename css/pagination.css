@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+ 
+body{
+ position: relative;
+ background-repeat: no-repeat;
+ box-sizing: border-box;
+ width: 100%;
+}
+
+section, header, div {
+  max-width: 100%;
+}
+
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.4; }
+.products-section { 
+    max-width: 1000px; 
+    margin: 30px auto; 
+}
+
+.products-section h1{
+    margin-bottom: 30px;
+}
+
+#paginationList { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0 0 16px 0; 
+    display: grid; gap: 12px; 
+}
+.pro-list { 
+    border: 1px solid #e1e1e1; 
+    padding: 12px; display: flex; 
+    gap: 12px; 
+    align-items: flex-start; 
+    background: #fff; 
+}
+.pro-list p{
+    text-align: justify;
+}
+.pro-list p span{
+    font-weight: bold;
+}
+.details { 
+    display: flex; 
+    gap: 12px; 
+    width: 100%; 
+}
+.details .image img { 
+    width: 320px; 
+    height: auto; 
+    display: block; 
+    object-fit: cover; 
+}
+.proDetails { 
+    flex: 1; 
+}
+.proDetails h3 { 
+    margin: 0 0 8px; 
+}
+.proDetails p { 
+    margin: 0 0 12px; 
+    color: #333; 
+}
+.order-btn { 
+    background: #ff6600; 
+    color: #fff; 
+    border: none; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    border-radius: 4px; 
+}
+
+.pagination { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    margin-top: 12px; 
+    justify-content: center; 
+}
+.pageNumbers a { 
+    margin: 0 6px; 
+    cursor: pointer; 
+    text-decoration: none;
+    color: #333;
+    padding: 6px 8px; 
+    border-radius: 4px; 
+    border: 1px solid transparent; 
+}
+.pageNumbers a.active { 
+    font-weight: bold; 
+    text-decoration: none;
+    color: #ff6600; 
+    /* border-color: #ddd; 
+    background: #fafafa;  */
+}
+button.control[disabled], .control.disabled { opacity: 0.7; pointer-events: none; border: none; }
+button.control#next, button.control#prev{ border: none; font-size: 15px; padding: 10px; margin: 0px 15px; background-color: #fff; }
+
+
+
+/* Ellipsis style for pagination */
+.pageNumbers .ellipsis {
+  display: inline-block;
+  padding: 6px 8px;
+  color: #888;
+  font-weight: bold;
+  user-select: none;
+}
+
+
+
+@media (max-width: 700px) {
+  .details { flex-direction: column; }
+  .details .image img { width: 100%; max-height: 550px; object-fit: cover; }
+}

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-compatible" content="ie=edge">
+    <title>L.A technology</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <!-- <script src="jquery.js"></script> -->
+
+    <script>
+        $(function(){
+            $("#orderbtn").load("Form.html");
+        })
+    </script>
+
+    <link rel="stylesheet" href="css/index.css"  type="text/css">
+    <link rel="stylesheet" href="css/product.css" type="text/css">
+    <link rel="stylesheet" href="css/pagination.css" type="text/css">
+</head>
+
+<body>
+
+
+    <!--Navbar Section Sart-->
+    <section id="header">
+        <div class="logo">
+            <!--<img src="images/LA web Logo.png" width="150" alt="">-->
+            <h1>L.A Technology</h1> <!--Company Logo on the navbar-->
+        </div>
+
+        <div>
+            <!--Narvbar contents-->
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="actives" href="Product.html">Products</a>
+                    <div class="sub-menu">
+                        <ul>
+                            <li><a href="Product.html">Logo</a></li>
+                            <li><a href="Product.html">Branding</a></li>
+                            <li><a href="Product.html">Printing</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="blogg.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+                <!--For mobile responsive navigation Close-->
+                <a href="#" id="close"><i class='bx bx-x'></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <!--For mobile responsive navigation Open-->
+            <a href="#" id="bar"><i class="fas fa-outdent"></i></a>
+        </div>
+    </section>
+    <!--Navbar Section End-->
+
+    <!--<i class="first" style="background-color: white;">--> <!--For Mobile responsive Navbar click-->
+
+
+        <!--Producst details sart-->
+
+        <div class="service-cover" style="background-image: url('images2/SERVICE.jpg');">
+            <h1>SERVICE</h1>
+            <a href="index.html"><h4>Home</h4></a>
+        </div>
+
+        
+    <section class="products-section">
+    <h1>Service — Products</h1>
+
+    <ul id="paginationList">
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/LOGO 4 WEB.jpg" alt="Logo">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Logo</h3>
+            <p>
+              Show off your brand identity with a custom creative logo design for your business by our   
+              professional graphic designer<br>
+              <span>Price:</span> Logo Design at <span>₦25,000.00</span>
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Banky card.jpg" alt="Business Card">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Business Card</h3>
+            <p>
+              Get creative Business Card Design and Printing Service to share with customers<br>
+              <span>Price:</span><br>
+              Single-Sided Business Cards Starting from <span>₦6,000.00</span> for 50 Copies 300gsm Thickness.<br>
+              Single-Sided Business Cards Starting from <span>₦7,000.00</span> for 50 Copies 600gsm Thicker<br>
+              Double-Sided Business Cards Starting from <span>₦8,500.00</span> for 50 Copies 300gsm Thickness<br>
+              Double-Sided Business Cards Starting from <span>₦9,500.00</span> for 50 Copies 300gsm Thickner<br>
+              Double-Sided Business Cards Starting from <span>₦20,00.00</span> for 100 Copies 400mgs or 800gsm
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Flyer Muckup.jpg" alt="Flyer">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Flyer Design and Printing</h3>
+            <p>
+              Order for a creative Flyer Design and Printing for your buisness online to boost your Sale and soothup your income.<br>
+              <span>Price:</span><br>
+              Single-Sided A4 Flyers Printing Starting from <span>₦43,500.00</span> for 100 Copies<br>
+              Double-Sided A4 Flyers Printing Starting from <span>₦52,300.00</span> for 100 Copies<br>
+              Single-Sided A5 Flyers Printing Starting from <span>₦25,800.00</span> for 100 Copies<br>
+              Double-Sided A5 Flyers Printing Starting from <span>₦38,900.00</span> for 100 Copies<br>
+              Single-Sided A6 Flyers Printing Starting from <span>₦17,400.00</span> for 100 Copies<br>
+              Double-Sided A6 Flyers Printing Starting from <span>₦29,400.00</span> for 100 Copies
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/letterhead.jpg" alt="Letterhead">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Office Letterhead</h3>
+            <p>
+              Customized A4 Office Letterhead @L.A_DESIGNZ<br>
+              <span>Price:</span><br>
+              A4 Customized Letterhead Design and Printing Starting from <span>₦25,500.00</span> for 100 copies
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Spce fragrance bag.jpg" alt="Paper Bag">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Paper Bag</h3>
+            <p>
+              Oredr for promotional vertical or horizontal Paper Bags for our business at a good price, get unique quality printing and have it deliver to our doostep.<br>
+              <span>Price:</span><br>
+              A5 Ppaper Bags printing starting from <span>₦40,800.00</span> for 50 copies.<br>
+              A4 Ppaper Bags printing starting from <span>₦104,800.00</span> for 100 copies.<br>
+              A3 Ppaper Bags printing starting from <span>₦171,100.00</span> for 50 copies.
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Jotter-Pen.jpg" alt="Notepad">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Notepad Design and Printing</h3>
+            <p>
+              Order Craetive Notepad Desing and Printing Online for your wedding, namimg ceremony, graduation, birthday or coporate events<br>
+              <span>Price:</span><br>
+              A4 Notepad/Jotter Soft Cover Printing Starting from <span>₦75,900.00</span> for 50 Copies<br>
+              A4 Notepad/Jotter Hard Cover Printing Starting from <span>₦103,400.00</span> for 50 Copies<br>
+              A4 Notepad/Jotter Hard Cover Printing Perfect Binding Starting from <span>₦143,400.00</span> for 50 Copies<br>
+              A5 Notepad/Jotter Soft Cover Printing Starting from <span>₦44,900.00</span> for 50 Copies<br>
+              A5 Notepad/Jotter Hard Cover Printing Starting from <span>₦60,900.00</span> for 50 Copies<br>
+              A5 Notepad/Jotter Hard Cover Printing Perfect Binding Starting from <span>₦9,900.00</span> for 50 Copies<br>
+              A4 Notepad/Jotter Soft Cover Printing Starting from <span>₦30,000.00</span> for 50 Copies<br>
+              A4 Notepad/Jotter Hard Cover Printing Starting from <span>₦39,750.00</span> for 50 Copies<br>
+              A4 Notepad/Jotter Hard Cover Printing Perfect Binding Starting from <span>₦61,250.00</span> for 50 Copies
+              - All 80 leaves stock inside -
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Double Billboard Mockup.jpg" alt="Billboard Poster">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Billboard Poster</h3>
+            <p>
+              Contact <span>@L.A DESIGNZ</span> for all our Custom Billboard Branding designs and printing. Big machine per ft + design starting
+              from <span>₦200</span> Small macine per ft + design starting from ₦210 at high-qualit printing.<br>
+              Sticker Design and Big Machine Printing: Starting from <span>₦210</span> per ft<br>
+              Sticker Design and Big Machine Printing: Starting from <span>₦220</span> per ft
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Bus Mockup.jpg" alt="Bus Branding">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Bus Branding and Design</h3>
+            <p>
+              Vehicle branding is one of the best medium of advertising for your business brand.<br>
+              <span>Price:</span><br>
+              One Wa Vision Starting from <span>₦22,000</span><br>
+              Basic Stop Graphics Starting from <span>₦32,000</span><br>
+              Spot Graphics Starting from <span>₦60,000</span><br>
+              Partial Wrap Starting from <span>₦60,000</span><br>
+              Full Wrap Starting from <span>₦80,000</span>
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Mock-up_Citylight_1.jpg" alt="Poster">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Poster</h3>
+            <p>
+              Online Poster design and printing @L.ADESIGNZ<br>
+              <span>Material:</span> full-color printing on 150 gsm Matte paper<br>
+              <span>Finishing:</span> A4 (2,40 px b 3,508 px size)<br>
+              <span>Price:</span> Poster Printing starting from ₦7,500 for 100 copies
+              <br><br>
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Nylon-Bag.jpg" alt="Nylon Bag">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Nylon Bag</h3>
+            <p>
+              Get your customized Nylon Bag design and printing at qualit price.<br>
+              <span>Price:</span><br>
+              Medium size Packaging Nnlon Bag price Starting From <span>₦12,500.00</span> for 50 copies<br>
+              Large size Packaging Nnlon Bag price Starting From <span>₦14,500.00</span> for 50 copies<br>
+              X-Large size Packaging Nnlon Bag price Starting From <span>₦18,500.00</span> for 50 copies
+              <br><br> 
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Rollup Banner.jpg" alt="Rollup Banner">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Rollup Banner</h3>
+            <p>
+              Order for custom rollup banners print and design with quick delivery to your desired location at affordable prices within Lagos Nigeria.
+              L.A. Designz is the best Print company services in Lagos Nigeria we produce different types of banner displays such as pole banners, pull-up or pop up backdrop banners, feather banners or flags banners, X-banners, framed banners, teardrop banners, expandable banners, suspended and hanging banners, promotional banners, events banners, religious banners, business banners, billboards banners Print and so on.<br>
+              <span>Price:</span><br>
+              Rollup Banners Print and Stand <span>(Small Base)</span> Starting from <span>₦60,000</span> per copy.<br>
+              Rollup Banners Print and Stand <span>(Big Base)</span> Starting from <span>₦65,000 </span> per copy.<br>
+              Rollup Banners Print and Stand <span>(4ft size)</span> Starting from <span>₦140,000</span> per copy.
+              <br><br> 
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+      <li class="pro-list">
+        <div class="details">
+          <div class="image">
+            <img src="images1/Table Calendar.jpg" alt="Table Calendar">
+          </div>
+          <div class="proDetails">
+            <h3 class="product-name">Table Calendar</h3>
+            <p>
+              Horizontal Table Calendar is an essential and effective tool in improving business productivity, Order for your quality table calendar, beautify your office with another standard creative brand.
+              Personalised desk/table calendars make useful gifts for the entire year, it can distribute to your successful clients and coworkers. They are the ideal year-round method of increasing brand awareness, delighting all year round! Our printed high quality full-color calendar designs are durable, eye-catching and can place your branding front and centre.<br>
+              <span>Price:</span><br>
+              Table Calendars (7 Sheets) Printing Starting from <span>₦35,600.00</span> for 10 copies two months per page.<br>
+              Table Calendars (13 Sheets) Printing Starting from <span>₦54,400.00</span> for 10 copies one month per page.<br>
+              <span>Delivery:</span>3-4 working days at your doorstep within Lagos, 5-7 working days for other state in Nigeria or Nationwide.
+              <br><br> 
+            </p>
+            <button class="order-btn" onclick="formload()">Order now</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="pagination">
+      <button class="control" id="prev" title="Previous page">&lt; Prev</button>
+      <div class="pageNumbers"></div>
+      <button class="control" id="next" title="Next page">Next &gt;</button>
+    </div>
+  </section>
+
+        <!--Producst details end-->
+        <div id="order-now" class="order-now">
+             <div class="form-container">
+                
+                <form action="https://formsubmit.co/seyi1st2021@gmail.com" method="POST" class="contact-form">
+                    <span id="close-form" onclick="off()">close</span>
+                    <h2>CONTACT</h2>
+                   
+                    <input type="text" id="name" name="name" required placeholder="Full name"><br>
+                    <input type="email" id="email" name="email" required placeholder="Email"><br>
+                    <input type="text" id="subject" name="subject" required placeholder="Subject"><br>
+                    <textarea id="message" name="msg" required placeholder="message" cols="30" rows="10"></textarea><br>
+                    <input type="submit" class="submit" value="Send Message">
+                </form>
+              </div>
+        </div>
+        
+
+        <button id="orderbtn" class="order-btn" onclick="formload()">Order now</button>
+
+        
+        <!--  Popup modal container -->
+        <div id="popup" class="modal">
+          <div class="modal-content" id="popupContent">
+            <span id="closeBtnPop">&times;</span>
+            <!-- indexForm.html content will load here -->
+          </div>
+        </div>
+         <!--  Popup modal container end-->
+        
+        <!--Footer Section start-->
+        <div>
+            <footer class="section-p1">
+                <div class="col">
+                    <img class="logo" src="images/la lodo re.png" alt="" width="100px" height="100px">
+                    <h4>Contact</h4>
+                    <p><strong>Address:</strong> No.16 Community road, Kola Street, Okota Lagos.</p>
+                    <p><strong>Phone:</strong> +234-80-3737-9779 / +234-70-52071961</p>
+                    <p><strong>Hours:</strong>24 Hours, Mon - Sat</p>
+                    <div class="follow">
+                        <h4>Follow us</h4>
+                        <div class="icon">
+                            <i class="fab fa-facbook-f"></i>
+                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-pinterest-p"></i>
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <h4>About</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Deliery Information</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Term & Condition</a>
+                    <a href="#">Contact Us</a>
+                </div>
+
+                <div class="col">
+                    <h4>M Account</h4>
+                    <a href="#">Sign In</a>
+                    <a href="#">View Cart</a>
+                    <a href="#">My Wishlist</a>
+                    <a href="#">Track My Order</a>
+                    <a href="#">Help</a>
+                </div>
+
+                <div class="col install">
+                    <h4>Delivery</h4>
+                    <div class="row">
+                        <i class="far fa-truck" aria-hidden="true"></i>
+                        <i class="far fa-motorcycle"></i>
+                    </div>
+                    <p>Secure Payment Gateways</p>
+                    <i class="far fa-credit-card-alt"></i>
+                </div>
+            </footer>
+            <div class="copyright">
+                <h6>&copy; 2026, L.A TECHNOLOGY</h6>
+            </div>
+        </div>
+        <!--Footer Section End-->
+
+
+        <script src="js/LA.js"></script>
+        <script src="js/product.js"></script>
+        <script src="js/formload.js"></script>
+        <script>
+            document.querySelectorAll(".order-now").forEach(btn => {
+              btn.addEventListener("click", formload);
+            });
+        </script>
+        <script src="js/form-handler.js"></script>
+
+     
+        <!--<script src="app.js"></script>-->
+
+
+
+        <!-- <script src="jquery.js"></script> -->
+
+</body>
+
+</html>
