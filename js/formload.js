@@ -31,7 +31,7 @@ function formload() {
       const formWrap = popup.querySelector(".form-wrap");
 
       if (inner) inner.style.position = "relative";
-      if (formWrap) formWrap.style.position = "relative";
+      // if (formWrap) formWrap.style.position = "relative";
 
       // Create close button and append it INSIDE the form
       const closeBtn = document.createElement("button");
@@ -41,27 +41,32 @@ function formload() {
       closeBtn.innerHTML = "×";
 
       Object.assign(closeBtn.style, {
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        width: "34px",
-        height: "34px",
-        borderRadius: "50%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#ff3b3b",
-        color: "#fff",
-        border: "none",
-        cursor: "pointer",
-        zIndex: "10002",
-        fontSize: "18px",
-        lineHeight: "1",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        zIndex: "10005"
+        // position: "absolute",
+        // top: "10px",
+        // right: "10px",
+        // width: "34px",
+        // height: "34px",
+        // borderRadius: "50%",
+        // display: "flex",
+        // alignItems: "center",
+        // justifyContent: "center",
+        // background: "#ff3b3b",
+        // color: "#fff",
+        // border: "none",
+        // cursor: "pointer",
+        // zIndex: "10002",
+        // fontSize: "18px",
+        // lineHeight: "1",
+        // boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
       });
 
       // Append inside formWrap (not outside)
-      formWrap.appendChild(closeBtn);
+      // formWrap.appendChild(closeBtn);
+      inner.appendChild(closeBtn);
 
       // Close button click handler
       closeBtn.onclick = (e) => {
@@ -100,6 +105,10 @@ function formload() {
             if (response.ok) {
               showMessage("success", " " + result.message);
               form.reset();
+
+              setTimeout(() => {
+                popup.remove();
+              }, 1500);
             } else {
               showMessage("error", " " + result.message);
             }
