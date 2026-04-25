@@ -17,7 +17,7 @@ function formload() {
       const popup = document.createElement("div");
       popup.classList.add("popup-container");
 
-      // Instead of injecting the button here, we’ll add it later inside formWrap
+      
       popup.innerHTML = `
         <div class="popup-inner">
           <div class="form-wrap">${data}</div>
@@ -89,7 +89,7 @@ function formload() {
           const message = form.querySelector("#message").value.trim();
 
           try {
-            const response = await fetch("/send", {
+            const response = await fetch("https://la-tech-backend.onrender.com/send", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ name, email, subject, message }),
@@ -101,7 +101,7 @@ function formload() {
               showMessage("success", " " + result.message);
               form.reset();
             } else {
-              showMessage("error", "❌ " + result.message);
+              showMessage("error", " " + result.message);
             }
           } catch (error) {
             console.error(error);
