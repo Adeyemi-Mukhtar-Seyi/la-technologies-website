@@ -569,6 +569,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding: 20px;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(6px);
   z-index: 9999;
@@ -592,19 +594,14 @@ p {
 
 .popup-inner {
   width: 90%;
-  max-width: 500px; /* increase from 420 → 500 */
-  min-width: 320px;
+  max-width: 500px;
   margin: auto;
   position: relative;
-  background: rgba(30, 30, 30, 0.65);
-  backdrop-filter: blur(18px);
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(12px);
   border-radius: 14px;
-  padding: 30px 25px;
+  padding: 40px 25px 25px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  transform: scale(0.9);
-  animation: scaleIn 0.3s ease forwards;
-  transform: scale(0.9);
-  animation: scaleIn 0.3s ease forwards;
   /* position: relative;
   margin-top: -650px;
   padding: 2rem;
@@ -626,8 +623,8 @@ p {
 /* Close button pop-up*/
 .closeBtnPop {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   border-radius: 50%;
   background: #ff3b3b;
   border: none;
@@ -637,7 +634,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 10000;
   transition: background 0.2s ease;
 }
 

@@ -81,10 +81,9 @@ div.contact-cover a {
 }
 
 .form-container {
-    position: relative;
-    width: 60%;
-    height: 40vh;
-    background-color: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
 }
 
 
