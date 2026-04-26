@@ -93,6 +93,13 @@ function formload() {
           const subject = form.querySelector("#subject").value.trim();
           const message = form.querySelector("#message").value.trim();
 
+          const submitBtn = form.querySelector("button[type='submit']");
+          const originalText = submitBtn.textContent;
+
+          // 🔥 Start loading
+          submitBtn.textContent = "Sending...";
+          submitBtn.disabled = true;
+
           try {
             const response = await fetch("https://la-tech-backend.onrender.com/send", {
               method: "POST",
@@ -107,16 +114,55 @@ function formload() {
               form.reset();
 
               setTimeout(() => {
-                popup.remove();
+                document.querySelector(".popup-container")?.remove();
               }, 1500);
+
             } else {
               showMessage("error", " " + result.message);
             }
+
           } catch (error) {
             console.error(error);
             showMessage("error", " Failed to send message. Please try again.");
           }
+
+          // 🔥 Stop loading (IMPORTANT)
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
         });
+
+        // form.addEventListener("submit", async (e) => {
+        //   e.preventDefault();
+
+        //   const name = form.querySelector("#name").value.trim();
+        //   const email = form.querySelector("#email").value.trim();
+        //   const subject = form.querySelector("#subject").value.trim();
+        //   const message = form.querySelector("#message").value.trim();
+
+        //   try {
+        //     const response = await fetch("https://la-tech-backend.onrender.com/send", {
+        //       method: "POST",
+        //       headers: { "Content-Type": "application/json" },
+        //       body: JSON.stringify({ name, email, subject, message }),
+        //     });
+
+        //     const result = await response.json();
+
+        //     if (response.ok) {
+        //       showMessage("success", " " + result.message);
+        //       form.reset();
+
+        //       setTimeout(() => {
+        //         popup.remove();
+        //       }, 1500);
+        //     } else {
+        //       showMessage("error", " " + result.message);
+        //     }
+        //   } catch (error) {
+        //     console.error(error);
+        //     showMessage("error", " Failed to send message. Please try again.");
+        //   }
+        // });
       } else {
         console.warn(" No .contact-form element found inside popup.");
       }
