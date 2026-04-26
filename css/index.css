@@ -380,6 +380,70 @@ p {
 }
 
 
+/* Form-load button base */
+.submit-btn {
+  position: relative;
+  padding: 12px 20px;
+  border: none;
+  background: #ff6600;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Disabled state */
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  margin-left: 8px;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Checkmark */
+.checkmark {
+  display: none;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* States */
+.loading .spinner {
+  display: inline-block;
+}
+
+.loading .btn-text {
+  opacity: 0.7;
+}
+
+.success .spinner {
+  display: none;
+}
+
+.success .checkmark {
+  display: inline-block;
+  color: #00ff88;
+}
+
+
 /*-- newletter Start --*/
   #newsletter {
     display: flex;
