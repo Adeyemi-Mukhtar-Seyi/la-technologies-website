@@ -41,27 +41,25 @@ function formload() {
       closeBtn.innerHTML = "×";
 
       Object.assign(closeBtn.style, {
-        position: "fixed",
-        top: "20px",
-        right: "20px",
-        zIndex: "10005"
-        // position: "absolute",
-        // top: "10px",
-        // right: "10px",
-        // width: "34px",
-        // height: "34px",
-        // borderRadius: "50%",
-        // display: "flex",
-        // alignItems: "center",
-        // justifyContent: "center",
-        // background: "#ff3b3b",
-        // color: "#fff",
-        // border: "none",
-        // cursor: "pointer",
-        // zIndex: "10002",
-        // fontSize: "18px",
-        // lineHeight: "1",
-        // boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
+          position: "absolute",
+          top: "12px",
+          right: "12px",
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          background: "rgba(255,255,255,0.1)",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "18px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backdropFilter: "blur(5px)"
+        // position: "fixed",
+        // top: "20px",
+        // right: "20px",
+        // zIndex: "10005"
       });
 
       // Append inside formWrap (not outside)
@@ -71,7 +69,10 @@ function formload() {
       // Close button click handler
       closeBtn.onclick = (e) => {
         e.stopPropagation();
-        popup.remove();
+        popup.style.opacity = "0";
+        popup.querySelector(".popup-inner").style.transform = "scale(0.9)";
+
+        setTimeout(() => popup.remove(), 200);
       };
 
       // Prevent clicks inside popup-inner from closing popup
@@ -134,7 +135,7 @@ function formload() {
             showMessage("error", " Failed to send message. Please try again.");
           }
 
-          //  Stop loading (IMPORTANT)
+          //  Stop loading 
           submitBtn.classList.remove("loading");
           btnText.textContent = "Send Message";
           submitBtn.disabled = false;
