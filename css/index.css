@@ -591,8 +591,8 @@ p {
 } */
 
 .popup-inner {
-  wwidth: 100% !important;
-  max-width: 520px !important;
+  width: 100% !important;
+  max-width: 500px !important;
   background: rgba(30,30,30,0.95) !important;
   border-radius: 14px !important;
   padding: 30px 25px !important;
@@ -610,7 +610,6 @@ p {
 .form-wrap,
 .form-container,
 .contact-sec {
-  all: unset !important;
   display: block !important;
   width: 100% !important;
 }
@@ -619,6 +618,53 @@ p {
   display: flex !important;
   flex-direction: column !important;
   gap: 12px !important;
+}
+
+/* Proper layout */
+
+.form-container {
+  width: 100%;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 14px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 0 2px rgba(255,102,0,0.2);
+}
+
+.contact-form h2 {
+  text-align: center;
+  color: #ff6600;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.submit-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 @keyframes fadeIn {
