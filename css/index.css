@@ -564,19 +564,14 @@ p {
 }
 
 .popup-container {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* position: fixed !important;
+  position: fixed !important;
   inset: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   background: rgba(0,0,0,0.7) !important;
   z-index: 9999 !important;
-  padding: 20px !important; */
+  padding: 20px !important;
   /* position: fixed;
   inset: 0;
   height: 100vh;
@@ -596,16 +591,14 @@ p {
 } */
 
 .popup-inner {
-  width: 100%;
-  max-width: 500px;
-  /* wwidth: 100% !important;
+  wwidth: 100% !important;
   max-width: 520px !important;
   background: rgba(30,30,30,0.95) !important;
   border-radius: 14px !important;
   padding: 30px 25px !important;
   box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
   transform: none !important;   
-  animation: none !important;    */
+  animation: none !important;   
   /* position: relative;
   margin-top: -650px;
   padding: 2rem;
@@ -614,19 +607,18 @@ p {
   box-shadow: 0 0 25px rgba(0,0,0,0.3); */
 }
 
-/* .form-wrap,
+.form-wrap,
 .form-container,
-.contact-sec {
+ {
   all: unset !important;
   display: block !important;
   width: 100% !important;
-} */
+}
 
 .contact-form {
   display: flex !important;
   flex-direction: column !important;
   gap: 12px !important;
-  width: 100%;
 }
 
 @keyframes fadeIn {
