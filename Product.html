@@ -92,7 +92,7 @@
               <span>Price:</span> Logo Design at <span>₦25,000.00</span>
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -114,7 +114,7 @@
               Double-Sided Business Cards Starting from <span>₦20,00.00</span> for 100 Copies 400mgs or 800gsm
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -137,7 +137,7 @@
               Double-Sided A6 Flyers Printing Starting from <span>₦29,400.00</span> for 100 Copies
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -155,7 +155,7 @@
               A4 Customized Letterhead Design and Printing Starting from <span>₦25,500.00</span> for 100 copies
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -175,7 +175,7 @@
               A3 Ppaper Bags printing starting from <span>₦171,100.00</span> for 50 copies.
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -202,7 +202,7 @@
               - All 80 leaves stock inside -
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -221,7 +221,7 @@
               Sticker Design and Big Machine Printing: Starting from <span>₦220</span> per ft
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -243,7 +243,7 @@
               Full Wrap Starting from <span>₦80,000</span>
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -262,7 +262,7 @@
               <span>Price:</span> Poster Printing starting from ₦7,500 for 100 copies
               <br><br>
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -282,7 +282,7 @@
               X-Large size Packaging Nnlon Bag price Starting From <span>₦18,500.00</span> for 50 copies
               <br><br> 
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -302,7 +302,7 @@
               Rollup Banners Print and Stand <span>(4ft size)</span> Starting from <span>₦140,000</span> per copy.
               <br><br> 
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -322,7 +322,7 @@
               <span>Delivery:</span>3-4 working days at your doorstep within Lagos, 5-7 working days for other state in Nigeria or Nationwide.
               <br><br> 
             </p>
-            <button class="order-btn" onclick="formload()">Order now</button>
+            <button class="order-btn" id="openModalBtn">Order now</button>
           </div>
         </div>
       </li>
@@ -338,17 +338,35 @@
         <!--Producst details end-->
 
 
-        <button id="orderbtn" class="order-btn" onclick="formload()">Order now</button>
+        <button class="order-btn" id="openModalBtn">Order now</button>
+
+
+        <!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    
+    <button class="modal-close" id="closeModal">&times;</button>
+
+    <form class="contact-form" id="contactForm">
+      <h2>Contact</h2>
+
+      <input type="text" id="name" placeholder="Full name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+      <textarea id="message" placeholder="Message" rows="5" required></textarea>
+
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Send Message</span>
+        <span class="spinner"></span>
+        <span class="checkmark">✔</span>
+      </button>
+    </form>
+
+  </div>
+</div>
 
         
-        <!--  Popup modal container -->
-        <div id="popup" class="modal">
-          <div class="modal-content" id="popupContent">
-            <span id="closeBtnPop">&times;</span>
-            <!-- indexForm.html content will load here -->
-          </div>
-        </div>
-         <!--  Popup modal container end-->
+        
         
         <!--Footer Section start-->
         <div>
@@ -409,7 +427,7 @@
 
         <script src="js/LA.js"></script>
         <script src="js/product.js"></script>
-        <script src="js/formload.js"></script>
+        <script src="js/modal.js"></script>
         <script>
             document.querySelectorAll(".order-now").forEach(btn => {
               btn.addEventListener("click", formload);
