@@ -591,6 +591,16 @@ Form style start
 }
 
 
+.success-message {
+  display: none;
+  background: #e6ffed;
+  color: #0f5132;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
+
 /////////////////////////////////////
 /*
 Form style end

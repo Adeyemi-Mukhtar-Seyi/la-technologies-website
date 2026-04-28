@@ -31,15 +31,17 @@ const transporter = nodemailer.createTransport({
 
 // Handle form POST
 app.post('/send', (req, res) => {
-  const { name, email, subject, message } = req.body;
+  const { name, email, subject, product, message } = req.body;
 
   const mailOptions = {
     from: email,
     to: 'seyi1st2019@gmail.com',
     subject: `New message from ${name} - ${subject}`,
     text: `
+    New Order Received
 Name: ${name}
 Email: ${email}
+Product: ${product}
 Subject: ${subject}
 
 Message:

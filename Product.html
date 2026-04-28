@@ -83,7 +83,7 @@
               <span>Price:</span> Logo Design at <span>₦25,000.00</span>
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Logo Design">Order now</button>
           </div>
         </div>
       </li>
@@ -105,7 +105,7 @@
               Double-Sided Business Cards Starting from <span>₦20,00.00</span> for 100 Copies 400mgs or 800gsm
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Business Card">Order now</button>
           </div>
         </div>
       </li>
@@ -128,7 +128,7 @@
               Double-Sided A6 Flyers Printing Starting from <span>₦29,400.00</span> for 100 Copies
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Flyer Design and Printing">Order now</button>
           </div>
         </div>
       </li>
@@ -146,7 +146,7 @@
               A4 Customized Letterhead Design and Printing Starting from <span>₦25,500.00</span> for 100 copies
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Office Letterhead">Order now</button>
           </div>
         </div>
       </li>
@@ -166,7 +166,7 @@
               A3 Ppaper Bags printing starting from <span>₦171,100.00</span> for 50 copies.
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Paper Bag">Order now</button>
           </div>
         </div>
       </li>
@@ -193,7 +193,7 @@
               - All 80 leaves stock inside -
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Notepad Design and Printing">Order now</button>
           </div>
         </div>
       </li>
@@ -212,7 +212,7 @@
               Sticker Design and Big Machine Printing: Starting from <span>₦220</span> per ft
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Billboard Poster">Order now</button>
           </div>
         </div>
       </li>
@@ -234,7 +234,7 @@
               Full Wrap Starting from <span>₦80,000</span>
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Bus Branding and Design">Order now</button>
           </div>
         </div>
       </li>
@@ -253,7 +253,7 @@
               <span>Price:</span> Poster Printing starting from ₦7,500 for 100 copies
               <br><br>
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Poster">Order now</button>
           </div>
         </div>
       </li>
@@ -273,7 +273,7 @@
               X-Large size Packaging Nnlon Bag price Starting From <span>₦18,500.00</span> for 50 copies
               <br><br> 
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Nylon Bag">Order now</button>
           </div>
         </div>
       </li>
@@ -293,7 +293,7 @@
               Rollup Banners Print and Stand <span>(4ft size)</span> Starting from <span>₦140,000</span> per copy.
               <br><br> 
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Rollup Banner">Order now</button>
           </div>
         </div>
       </li>
@@ -313,7 +313,7 @@
               <span>Delivery:</span>3-4 working days at your doorstep within Lagos, 5-7 working days for other state in Nigeria or Nationwide.
               <br><br> 
             </p>
-            <button class="order-btn open-modal">Order now</button>
+            <button class="order-btn open-modal" data-product="Table Calendar">Order now</button>
           </div>
         </div>
       </li>
@@ -332,6 +332,9 @@
         <button class="order-btn open-modal">Order now</button>
 
 
+        <div class="success-message" id="successMessage">
+          ✅ Your request has been sent successfully!
+        </div>
         <!-- MODAL -->
 <div id="modal">
   <div class="modal-content">
@@ -342,6 +345,7 @@
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="text" name="subject" placeholder="Subject" required>
+      <input type="text" name="product" id="productInput" readonly>
       <textarea name="message" placeholder="Message"></textarea>
 
       <button type="submit" class="submit-btn">

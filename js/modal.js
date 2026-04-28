@@ -5,6 +5,7 @@
   const closeBtn = document.getElementById("closeModal");
   const buttons = document.querySelectorAll(".order-btn");
   const form = document.getElementById("contactForm");
+  const productInput = document.getElementById("productInput");
 
   console.log("Buttons found:", buttons.length);
 
@@ -17,11 +18,26 @@
     });
   });
 
+  
+
+        buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const productName = btn.getAttribute("data-product");
+
+            productInput.value = productName;
+
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+        });
+
   // Close modal (X button)
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
       document.body.style.overflow = "auto";
+      form.style.display = "flex";
+      successMsg.style.display = "none";
     });
   }
 
@@ -42,6 +58,8 @@
 
       const btn = form.querySelector(".submit-btn");
       const btnText = btn.querySelector(".btn-text");
+      const successMsg = document.getElementById("successMessage");
+
 
       btn.classList.add("loading");
       btnText.textContent = "Sending...";
@@ -55,6 +73,7 @@
             name: form.name.value,
             email: form.email.value,
             subject: form.subject.value,
+            product: form.product.value,
             message: form.message.value,
           }),
         });
@@ -63,8 +82,10 @@
 
         if (res.ok) {
           btn.classList.remove("loading");
-          btn.classList.add("success");
-          btnText.textContent = "Sent";
+          successMsg.style.display = "block";
+          form.style.display = "none";
+        //   btn.classList.add("success");
+        //   btnText.textContent = "Sent";
 
           form.reset();
 
