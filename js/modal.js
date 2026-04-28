@@ -68,7 +68,9 @@
       });
 
       if (res.ok) {
+        console.log("SUCCESS BLOCK HIT");
         form.reset();
+        
 
         successMsg.textContent = "✅ Your request has been sent successfully!";
         successMsg.style.display = "block";
