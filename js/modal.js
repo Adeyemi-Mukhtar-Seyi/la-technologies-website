@@ -70,11 +70,14 @@
       if (res.ok) {
             form.reset();
 
-            setTimeout(() => {
-                successMsg.innerHTML = "✅ Your request has been sent successfully!";
-                successMsg.style.display = "block";
-                form.style.display = "none";
-            }, 50);
+            successMsg.innerHTML = `
+                <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
+                ✅ Your request has been sent successfully!
+                </div>
+            `;
+
+            successMsg.style.display = "block";
+            form.style.display = "none";
         }
 
     } catch (err) {
