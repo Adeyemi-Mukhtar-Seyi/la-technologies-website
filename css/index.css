@@ -500,7 +500,7 @@ Form style start
 /* ===== MODAL SYSTEM ===== */
 
 /* ===== MODAL BASE ===== */
-#modal {
+/* #modal {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.85);
@@ -514,7 +514,7 @@ Form style start
 
 #modal.active {
   display: flex;
-}
+} */
 
 /* ===== MODAL BOX ===== */
 .modal-content {
@@ -561,6 +561,33 @@ Form style start
   border: none;
   padding: 12px;
   cursor: pointer;
+}
+
+#modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+
+  background: rgba(0,0,0,0.8);
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999999 !important;
+}
+
+#modal.active {
+  display: flex !important;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
 }
 
 

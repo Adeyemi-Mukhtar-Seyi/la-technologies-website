@@ -3,37 +3,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.getElementById("closeModal");
   const form = document.getElementById("contactForm");
 
-  console.log("JS Loaded"); // debug
+  console.log("JS Loaded");
 
-  // Select ALL buttons
-  const openButtons = document.querySelectorAll(".open-modal");
-  console.log("Buttons found:", openButtons.length); // debug
+const modal = document.getElementById("modal");
+const closeBtn = document.getElementById("closeModal");
 
-  openButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      console.log("Button clicked"); // debug
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
+// SELECT ALL BUTTONS
+const buttons = document.querySelectorAll(".order-btn");
+
+console.log("Buttons found:", buttons.length);
+
+// OPEN MODAL
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    console.log("Button clicked");
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
   });
+});
 
-  // Close button
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("active");
-      document.body.style.overflow = "auto";
-    });
-  }
+// CLOSE MODAL
+closeBtn.onclick = () => {
+  modal.classList.remove("active");
+  document.body.style.overflow = "auto";
+};
 
-  // Click outside
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        document.body.style.overflow = "auto";
-      }
-    });
+// CLICK OUTSIDE
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "auto";
   }
+});
 
   // Form submit
   if (form) {
