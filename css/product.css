@@ -131,16 +131,16 @@ div.proDetails .order-btn {
 
 /*CONTACT FORM  SECTION*/
 
-.form-container {
+/* .form-container {
     position: relative;
     margin: auto;
     width: 50%;
     height: 100%;
     overflow: hidden;
     background-color: #2b2a2a;
-}
+} */
 
- .contact-form span {
+ /* .contact-form span {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,9 +154,9 @@ div.proDetails .order-btn {
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
-}
+} */
 
-input[type=text],
+/* input[type=text],
 [type=email] {
     width: 20em;
     height: 5vh;
@@ -166,14 +166,14 @@ input[type=text],
     border: 0;
     border-bottom: 2px;
     outline: none;
-}
+} */
 
-#message {
+/* #message {
     background: transparent;
     color: #fff;
-}
+} */
 
-.conatc-sec {
+/* .conatc-sec {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,9 +190,9 @@ input[type=text],
 .contact-form h2 {
     margin-top: 20px;
     color: #f26522;
-}
+} */
 
-input,
+/* input,
 textarea {
     width: 100%;
     margin-top: 2rem;
@@ -212,7 +212,7 @@ textarea {
 .submit:hover {
     color: #fff;
     opacity: 0.6;
-}
+} */
 
 /* ORDER BUTTON*/
 .order-now {
