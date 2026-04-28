@@ -75,9 +75,10 @@
                 ✅ Your request has been sent successfully!
                 </div>
             `;
-
-            successMsg.style.display = "block";
-            form.style.display = "none";
+            successMsg.style.display = "none";
+            form.style.display = "flex";
+            // successMsg.style.display = "block";
+            // form.style.display = "none";
         }
 
     } catch (err) {
