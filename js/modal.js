@@ -4,9 +4,11 @@
   const modal = document.getElementById("modal");
   const closeBtn = document.getElementById("closeModal");
   const buttons = document.querySelectorAll(".order-btn");
+  const form = document.getElementById("contactForm");
 
   console.log("Buttons found:", buttons.length);
 
+  // Open modal
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       console.log("Button clicked");
@@ -15,21 +17,25 @@
     });
   });
 
-  closeBtn.addEventListener("click", () => {
-    modal.classList.remove("active");
-    document.body.style.overflow = "auto";
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
+  // Close modal (X button)
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
       document.body.style.overflow = "auto";
-    }
-  });
-})();
+    });
+  }
+
+  // Close when clicking outside
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+    });
+  }
 
   // Form submit
-  const form = document.getElementById("contactForm");
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -79,8 +85,8 @@
       btn.disabled = false;
     });
   }
-});
 
+})();
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const modal = document.getElementById("modal");
