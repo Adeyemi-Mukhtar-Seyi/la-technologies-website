@@ -36,8 +36,9 @@
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
       document.body.style.overflow = "auto";
-      form.style.display = "flex";
-      successMsg.style.display = "none";
+      successMsg.textContent = "✅ Your request has been sent successfully!";
+      successMsg.style.display = "block";
+      form.style.display = "none";
     });
   }
 
