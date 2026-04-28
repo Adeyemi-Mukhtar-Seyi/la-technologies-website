@@ -535,7 +535,10 @@ Form style start
 }
 
 .success-message {
-  display: none;
+  display: block !important;
+  color: red !important;
+  font-size: 20px !important;
+  /* display: none;
   background: #e6ffed;
   color: #0f5132;
   padding: 15px;
@@ -543,7 +546,7 @@ Form style start
   text-align: center;
   font-size: 15px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 10px; */
 }
 
 .contact-form {

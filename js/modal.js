@@ -68,17 +68,14 @@
       });
 
       if (res.ok) {
-        console.log("SUCCESS BLOCK HIT");
-        form.reset();
-        
+            form.reset();
 
-        successMsg.textContent = "✅ Your request has been sent successfully!";
-        successMsg.style.display = "block";
-
-        form.style.display = "none";
-      } else {
-        throw new Error();
-      }
+            setTimeout(() => {
+                successMsg.innerHTML = "✅ Your request has been sent successfully!";
+                successMsg.style.display = "block";
+                form.style.display = "none";
+            }, 50);
+        }
 
     } catch (err) {
       successMsg.textContent = "❌ Failed to send message. Try again.";
