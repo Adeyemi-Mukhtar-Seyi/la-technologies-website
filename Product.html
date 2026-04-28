@@ -332,11 +332,6 @@
         <button class="order-btn open-modal">Order now</button>
 
 
-        <div class="success-message" id="successMessage">
-          ✅ Your request has been sent successfully!
-        </div>
-        <!-- MODAL -->
-
         
         
         
@@ -398,24 +393,30 @@
 
         <!-- Form modal -->
         <div id="modal">
-          <div class="modal-content">
+  <div class="modal-content">
 
-            <button id="closeModal" class="modal-close">×</button>
+    <button id="closeModal" class="modal-close">×</button>
 
-            <form id="contactForm" class="contact-form">
-              <input type="text" name="name" placeholder="Your Name" required>
-              <input type="email" name="email" placeholder="Your Email" required>
-              <input type="text" name="subject" placeholder="Subject" required>
-              <input type="text" name="product" id="productInput" readonly>
-              <textarea name="message" placeholder="Message"></textarea>
+    <!-- ✅ SUCCESS MESSAGE (NOW INSIDE MODAL) -->
+    <div id="successMessage" class="success-message"></div>
 
-              <button type="submit" class="submit-btn">
-                <span class="btn-text">Send Message</span>
-              </button>
-            </form>
+    <form id="contactForm" class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
 
-          </div>
-        </div>
+      <input type="text" name="product" id="productInput" readonly>
+
+      <input type="text" name="subject" placeholder="Subject" required>
+
+      <textarea name="message" placeholder="Message"></textarea>
+
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Send Message</span>
+      </button>
+    </form>
+
+  </div>
+</div>
 
         <script src="js/LA.js"></script>
         <script src="js/product.js"></script>
