@@ -72,28 +72,28 @@ if (document.querySelector('.element')) {
 
 //Form Loading
 
-function formload(){
-   if (document.getElementById("order-now")){
-         if (document.getElementById("order-now").style.display == "none"){
-            document.getElementById("order-now").style.display = "block";
-            document.getElementById("formDisplay").style.direction = "none";
-         }
-         else {
-            document.getElementById("order-now").style.display = "none";
-            document.getElementById("formDisplay").style.display = "block"
-         }
-   }
-   /*var x = document.getElementById("order-now")
-   if (x.style.dispplay === "none"){
-      x.style.display = "block"
-   }else{
-      x.style.display = "none"
-   }*/
-}
+// function formload(){
+//    if (document.getElementById("order-now")){
+//          if (document.getElementById("order-now").style.display == "none"){
+//             document.getElementById("order-now").style.display = "block";
+//             document.getElementById("formDisplay").style.direction = "none";
+//          }
+//          else {
+//             document.getElementById("order-now").style.display = "none";
+//             document.getElementById("formDisplay").style.display = "block"
+//          }
+//    }
+//    /*var x = document.getElementById("order-now")
+//    if (x.style.dispplay === "none"){
+//       x.style.display = "block"
+//    }else{
+//       x.style.display = "none"
+//    }*/
+// }
 
-function off(){
-     document.getElementById("order-now").style.display = "none";
-}
+// function off(){
+//      document.getElementById("order-now").style.display = "none";
+// }
 
 
 
