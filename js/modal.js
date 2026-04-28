@@ -94,7 +94,7 @@
             document.body.style.overflow = "auto";
             btn.classList.remove("success");
             btnText.textContent = "Send Message";
-          }, 3000);
+          }, 6000);
         } else {
           throw new Error(data.message);
         }
