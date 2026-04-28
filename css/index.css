@@ -503,39 +503,6 @@ Form style start
 
 /* ===== MODAL BOX ===== */
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-.submit-btn {
-  background: #ff6600;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  cursor: pointer;
-}
-
-.modal-content {
-  background: #fff;
-  width: 90%;
-  max-width: 420px;
-  padding: 25px;
-  border-radius: 10px;
-
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-}
-
 #modal {
   position: fixed;
   top: 0;
@@ -555,18 +522,30 @@ Form style start
 #modal.active {
   display: flex;
 }
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  border: none;
-  background: #eee;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 10px;
+
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
-/* Form */
+.success-message {
+  display: none;
+  background: #e6ffed;
+  color: #0f5132;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -581,7 +560,6 @@ Form style start
   outline: none;
 }
 
-/* Button */
 .submit-btn {
   background: #ff6600;
   color: #fff;
@@ -590,17 +568,43 @@ Form style start
   cursor: pointer;
 }
 
-
-.success-message {
-  display: none;
-  background: #e6ffed;
-  color: #0f5132;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: #eee;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
+
+/* Form */
+/* .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+} */
+
+/* Button */
+/* .submit-btn {
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+} */
+
+
+
 
 /////////////////////////////////////
 /*
