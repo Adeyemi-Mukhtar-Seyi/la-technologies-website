@@ -36,8 +36,7 @@
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
       document.body.style.overflow = "auto";
-      successMsg.textContent = "✅ Your request has been sent successfully!";
-      successMsg.style.display = "block";
+      successMsg.style.display = "none";
       form.style.display = "none";
     });
   }
@@ -66,6 +65,7 @@
       btnText.textContent = "Sending...";
       btn.disabled = true;
 
+        
       try {
         const res = await fetch("https://la-tech-backend.onrender.com/send", {
           method: "POST",
@@ -89,6 +89,12 @@
         //   btnText.textContent = "Sent";
 
           form.reset();
+
+            successMsg.textContent = "✅ Your request has been sent successfully!";
+            successMsg.style.display = "block";
+
+            form.style.display = "none";
+
 
           setTimeout(() => {
             modal.classList.remove("active");
