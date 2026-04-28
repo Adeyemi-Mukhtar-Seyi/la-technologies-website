@@ -333,11 +333,12 @@
 
 
         <!-- MODAL -->
-<div id="modal" class="modal">
+<div id="modal">
   <div class="modal-content">
-    <span id="closeModal">&times;</span>
 
-    <form id="contactForm">
+    <button id="closeModal" class="modal-close">×</button>
+
+    <form id="contactForm" class="contact-form">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="text" name="subject" placeholder="Subject" required>
@@ -347,6 +348,7 @@
         <span class="btn-text">Send Message</span>
       </button>
     </form>
+
   </div>
 </div>
         
