@@ -515,7 +515,13 @@ Form style start
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
+  font-size: 14px;
   outline: none;
+}
+
+.contact-form textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .submit-btn {
@@ -524,6 +530,8 @@ Form style start
   border: none;
   padding: 12px;
   cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .modal-close {
@@ -570,6 +578,7 @@ Form style start
   background: #fff !important;
   width: 90% !important;
   max-width: 420px !important;
+  margin: auto;
   padding: 25px !important;
   border-radius: 10px !important;
   position: relative !important;
@@ -594,6 +603,9 @@ Form style start
   margin-bottom: 10px;
 }
 
+.contact-form * {
+  flex: none !important;
+}
 
 /* Form */
 /* .contact-form {
