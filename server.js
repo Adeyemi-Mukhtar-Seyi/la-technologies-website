@@ -7,7 +7,10 @@ require('dotenv').config();
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://latechnology.netlify.app",
+  methods: ["GET", "POST"],
+}));
 const PORT = process.env.PORT || 3000;
 
 
@@ -41,11 +44,13 @@ transporter.verify((error, success) => {
 
 // Handle form POST
 app.post('/send', (req, res) => {
+  try {
   console.log("Incoming request:", req.body);
   const { name, email, subject, product, message } = req.body;
 
   const mailOptions = {
-    from: email,
+    from: process.env.EMAIL_USER,
+    replyTo: email,
     to: 'seyi1st2019@gmail.com',
     subject: `New message from ${name} - ${subject}`,
     text: `
@@ -60,14 +65,23 @@ ${message}
 `,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Message failed to send.' });
-    }
-    console.log('Email sent: ' + info.response);
+    const info = await transporter.sendMail(mailOptions);
+
+    console.log("Email sent:", info.response);
     res.status(200).json({ message: 'Message sent successfully!' });
-  });
+
+  } catch (error) {
+    console.error("SEND ERROR:", error); // 👈 THIS is what you need
+    res.status(500).json({ message: 'Message failed to send.' });
+  }
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.error(error);
+  //     return res.status(500).json({ message: 'Message failed to send.' });
+  //   }
+  //   console.log('Email sent: ' + info.response);
+  //   res.status(200).json({ message: 'Message sent successfully!' });
+  // });
 });
 
 
