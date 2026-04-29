@@ -31,6 +31,7 @@ const transporter = nodemailer.createTransport({
 
 // Handle form POST
 app.post('/send', (req, res) => {
+  console.log("Incoming request:", req.body);
   const { name, email, subject, product, message } = req.body;
 
   const mailOptions = {
