@@ -39,61 +39,107 @@ app.post('/send', async (req, res) => {
 
     const { name, email, subject, product, message } = req.body;
 
-    // Save to DB
-    const newOrder = await Order.create({
-      name,
-      email,
-      subject,
-      product,
-      message
-    });
+    // Save to DB (optional safe)
+    let newOrder = null;
+    try {
+      newOrder = await Order.create({ name, email, subject, product, message });
+    } catch (dbErr) {
+      console.error("DB ERROR:", dbErr);
+    }
 
-    // ✅ Send email to YOU (admin)
-    await resend.emails.send({
-      from: "L.A Technology <onboarding@resend.dev>", // temporary sender
+    // Send email
+    const response = await resend.emails.send({
+      from: "L.A Technology <onboarding@resend.dev>",
       to: ["seyi1st2019@gmail.com"],
       subject: `New Order: ${product}`,
       text: `
-      Name: ${name}
-      Email: ${email}
-      Product: ${product}
-      Subject: ${subject}
+Name: ${name}
+Email: ${email}
+Product: ${product}
+Subject: ${subject}
 
-      Message:
-      ${message}
+Message:
+${message}
       `
     });
 
-    // ✅ Auto reply to customer
-    await resend.emails.send({
-      from: "L.A Technology <onboarding@resend.dev>",
-      to: [email],
-      subject: "Your Order has been received",
-      text: `
-      Hi ${name},
-
-      Thanks for ordering "${product}" from L.A Technology.
-
-      We will contact you shortly.
-
-      Best regards,
-      L.A Technology
-      `
-    });
+    console.log("RESEND RESPONSE:", response);
 
     res.status(200).json({
       success: true,
-      orderId: newOrder._id
+      orderId: newOrder?._id || null
     });
 
-      } catch (err) {
-      console.error("FULL ERROR:", err);
+  } catch (err) {
+    console.error("FULL ERROR:", err);
 
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack
-      });
-}})
+    res.status(500).json({
+      message: err.message
+    });
+  }
+});
+
+// app.post('/send', async (req, res) => {
+//   try {
+//     console.log("Incoming request:", req.body);
+
+//     const { name, email, subject, product, message } = req.body;
+
+//     // Save to DB
+//     const newOrder = await Order.create({
+//       name,
+//       email,
+//       subject,
+//       product,
+//       message
+//     });
+
+//     // ✅ Send email to YOU (admin)
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>", // temporary sender
+//       to: ["seyi1st2019@gmail.com"],
+//       subject: `New Order: ${product}`,
+//       text: `
+//       Name: ${name}
+//       Email: ${email}
+//       Product: ${product}
+//       Subject: ${subject}
+
+//       Message:
+//       ${message}
+//       `
+//     });
+
+//     // ✅ Auto reply to customer
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>",
+//       to: [email],
+//       subject: "Your Order has been received",
+//       text: `
+//       Hi ${name},
+
+//       Thanks for ordering "${product}" from L.A Technology.
+
+//       We will contact you shortly.
+
+//     Best regards,
+//       L.A Technology
+//       `
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       orderId: newOrder._id
+//     });
+
+//       } catch (err) {
+//       console.error("FULL ERROR:", err);
+
+//       res.status(500).json({
+//         message: err.message,
+//         stack: err.stack
+//       });
+// }})
 
 // ================== GET ORDERS ==================
 app.get('/orders', async (req, res) => {
