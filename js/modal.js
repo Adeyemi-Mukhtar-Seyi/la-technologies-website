@@ -70,17 +70,18 @@
       });
 
       if (res.ok) {
-            form.reset();
+            
+            payWithPaystack(form.email.value, form.product.value);
 
-            successMsg.innerHTML = `
-                <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
-                ✅ Your request has been sent successfully!
-                </div>
-            `;
-            successMsg.style.display = "none";
-            form.style.display = "flex";
-            // successMsg.style.display = "block";
-            // form.style.display = "none";
+            //form.reset();
+            // successMsg.innerHTML = `
+            //     <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
+            //     ✅ Your request has been sent successfully!
+            //     </div>
+            // `;
+            // successMsg.style.display = "none";
+            // form.style.display = "flex";
+            
         }
 
     } catch (err) {
@@ -93,7 +94,37 @@
     btnText.textContent = "Send Message";
   });
 
+
 })();
+
+
+//payment fucntion
+function payWithPaystack(email, product) {
+
+  // 💰 SET PRICE BASED ON PRODUCT
+  let amount = 25000; // default
+
+  if (product.includes("Business Card")) amount = 6000;
+  if (product.includes("Flyer")) amount = 43500;
+  if (product.includes("Logo")) amount = 25000;
+
+  let handler = PaystackPop.setup({
+    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
+    email: email,
+    amount: amount * 100, // kobo
+    currency: "NGN",
+
+    callback: function(response) {
+      alert("Payment successful! Ref: " + response.reference);
+    },
+
+    onClose: function() {
+      alert("Payment cancelled");
+    }
+  });
+
+  handler.openIframe();
+}
 
 
 
