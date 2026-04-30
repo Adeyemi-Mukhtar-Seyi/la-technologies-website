@@ -54,13 +54,13 @@ app.post('/send', async (req, res) => {
       to: ["seyi1st2019@gmail.com"],
       subject: `New Order: ${product}`,
       text: `
-Name: ${name}
-Email: ${email}
-Product: ${product}
-Subject: ${subject}
+      Name: ${name}
+      Email: ${email}
+      Product: ${product}
+      Subject: ${subject}
 
-Message:
-${message}
+      Message:
+      ${message}
       `
     });
 
@@ -70,14 +70,14 @@ ${message}
       to: [email],
       subject: "Your Order has been received",
       text: `
-Hi ${name},
+      Hi ${name},
 
-Thanks for ordering "${product}" from L.A Technology.
+      Thanks for ordering "${product}" from L.A Technology.
 
-We will contact you shortly.
+      We will contact you shortly.
 
-Best regards,
-L.A Technology
+      Best regards,
+      L.A Technology
       `
     });
 
@@ -86,14 +86,14 @@ L.A Technology
       orderId: newOrder._id
     });
 
-  } catch (err) {
-  console.error("FULL ERROR:", err);
+      } catch (err) {
+      console.error("FULL ERROR:", err);
 
-  res.status(500).json({
-    message: err.message,
-    stack: err.stack
-  });
-}
+      res.status(500).json({
+        message: err.message,
+        stack: err.stack
+      });
+}})
 
 // ================== GET ORDERS ==================
 app.get('/orders', async (req, res) => {
