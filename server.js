@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 const cors = require('cors');
 require('dotenv').config();
 
@@ -30,14 +31,6 @@ const OrderSchema = new mongoose.Schema({
 
 const Order = mongoose.model("Order", OrderSchema);
 
-// ================== EMAIL ==================
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
 
 // ================== SEND ORDER ==================
 app.post('/send', async (req, res) => {
@@ -46,7 +39,7 @@ app.post('/send', async (req, res) => {
 
     const { name, email, subject, product, message } = req.body;
 
-    // ✅ Save to DB FIRST (this should always work)
+    // Save to DB
     const newOrder = await Order.create({
       name,
       email,
@@ -55,13 +48,12 @@ app.post('/send', async (req, res) => {
       message
     });
 
-    // ✅ SEND ADMIN EMAIL (SAFE)
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER, 
-        to: process.env.EMAIL_USER,
-        subject: `New Order: ${product}`,
-        text: `
+    // ✅ Send email to YOU (admin)
+    await resend.emails.send({
+      from: "L.A Technology <onboarding@resend.dev>", // temporary sender
+      to: ["seyi1st2019@gmail.com"],
+      subject: `New Order: ${product}`,
+      text: `
 Name: ${name}
 Email: ${email}
 Product: ${product}
@@ -69,19 +61,15 @@ Subject: ${subject}
 
 Message:
 ${message}
-        `
-      });
-    } catch (err) {
-      console.error("ADMIN EMAIL FAILED:", err);
-    }
+      `
+    });
 
-    // ✅ AUTO REPLY (SAFE)
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: "Your Order has been received",
-        text: `
+    // ✅ Auto reply to customer
+    await resend.emails.send({
+      from: "L.A Technology <onboarding@resend.dev>",
+      to: [email],
+      subject: "Your Order has been received",
+      text: `
 Hi ${name},
 
 Thanks for ordering "${product}" from L.A Technology.
@@ -90,23 +78,19 @@ We will contact you shortly.
 
 Best regards,
 L.A Technology
-        `
-      });
-    } catch (err) {
-      console.error("AUTO REPLY FAILED:", err);
-    }
+      `
+    });
 
-    // ✅ ALWAYS RESPOND SUCCESS (VERY IMPORTANT)
     res.status(200).json({
       success: true,
       orderId: newOrder._id
     });
 
   } catch (err) {
-    console.error("SERVER ERROR:", err);
+    console.error("RESEND ERROR:", err);
 
     res.status(500).json({
-      message: "Server error"
+      message: "Email failed"
     });
   }
 });
