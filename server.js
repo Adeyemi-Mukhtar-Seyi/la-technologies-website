@@ -87,13 +87,13 @@ L.A Technology
     });
 
   } catch (err) {
-    console.error("RESEND ERROR:", err);
+  console.error("FULL ERROR:", err);
 
-    res.status(500).json({
-      message: "Email failed"
-    });
-  }
-});
+  res.status(500).json({
+    message: err.message,
+    stack: err.stack
+  });
+}
 
 // ================== GET ORDERS ==================
 app.get('/orders', async (req, res) => {
