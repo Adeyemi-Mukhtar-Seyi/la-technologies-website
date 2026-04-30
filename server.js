@@ -38,19 +38,26 @@ const transporter = nodemailer.createTransport({
 // ================== SEND ORDER ==================
 app.post('/send', async (req, res) => {
   try {
+    console.log("Incoming request:", req.body);
+
     const { name, email, subject, product, message } = req.body;
 
-    // Save to DB
+    // ✅ Save to DB FIRST (this should always work)
     const newOrder = await Order.create({
-      name, email, subject, product, message
+      name,
+      email,
+      subject,
+      product,
+      message
     });
 
-    // Admin Email
-    await transporter.sendMail({
-      from: email,
-      to: process.env.EMAIL_USER,
-      subject: `New Order: ${product}`,
-      text: `
+    // ✅ SEND ADMIN EMAIL (SAFE)
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER, 
+        to: process.env.EMAIL_USER,
+        subject: `New Order: ${product}`,
+        text: `
 Name: ${name}
 Email: ${email}
 Product: ${product}
@@ -58,15 +65,19 @@ Subject: ${subject}
 
 Message:
 ${message}
-      `
-    });
+        `
+      });
+    } catch (err) {
+      console.error("ADMIN EMAIL FAILED:", err);
+    }
 
-    // Auto reply to customer
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Your Order has been received",
-      text: `
+    // ✅ AUTO REPLY (SAFE)
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: "Your Order has been received",
+        text: `
 Hi ${name},
 
 Thanks for ordering "${product}" from L.A Technology.
@@ -75,14 +86,24 @@ We will contact you shortly.
 
 Best regards,
 L.A Technology
-      `
+        `
+      });
+    } catch (err) {
+      console.error("AUTO REPLY FAILED:", err);
+    }
+
+    // ✅ ALWAYS RESPOND SUCCESS (VERY IMPORTANT)
+    res.status(200).json({
+      success: true,
+      orderId: newOrder._id
     });
 
-    res.json({ success: true, orderId: newOrder._id });
-
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed" });
+    console.error("SERVER ERROR:", err);
+
+    res.status(500).json({
+      message: "Server error"
+    });
   }
 });
 
