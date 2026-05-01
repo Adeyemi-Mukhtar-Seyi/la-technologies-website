@@ -1,16 +1,20 @@
+require('dotenv').config(); // ✅ MUST BE FIRST
+
 const express = require('express');
 const mongoose = require('mongoose');
 const { Resend } = require('resend');
 const resend = new Resend(process.env.RESEND_API_KEY);
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
 
 const app = express();
+
 app.use(cors({
   origin: "https://latechnology.netlify.app",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 }));
+
 app.use(express.json());
 
 // ================== MONGODB ==================
@@ -31,7 +35,6 @@ const OrderSchema = new mongoose.Schema({
 
 const Order = mongoose.model("Order", OrderSchema);
 
-
 // ================== SEND ORDER ==================
 app.post('/send', async (req, res) => {
   try {
@@ -39,7 +42,6 @@ app.post('/send', async (req, res) => {
 
     const { name, email, subject, product, message } = req.body;
 
-    // Save to DB
     const newOrder = await Order.create({
       name,
       email,
@@ -48,36 +50,34 @@ app.post('/send', async (req, res) => {
       message
     });
 
-    // ✅ Send email to YOU (admin)
     await resend.emails.send({
-      from: "L.A Technology <onboarding@resend.dev>", // temporary sender
+      from: "L.A Technology <onboarding@resend.dev>",
       to: ["seyi1st2019@gmail.com"],
       subject: `New Order: ${product}`,
       text: `
-      Name: ${name}
-      Email: ${email}
-      Product: ${product}
-      Subject: ${subject}
+Name: ${name}
+Email: ${email}
+Product: ${product}
+Subject: ${subject}
 
-      Message:
-      ${message}
+Message:
+${message}
       `
     });
 
-    // ✅ Auto reply to customer
     await resend.emails.send({
       from: "L.A Technology <onboarding@resend.dev>",
       to: [email],
       subject: "Your Order has been received",
       text: `
-      Hi ${name},
+Hi ${name},
 
-      Thanks for ordering "${product}" from L.A Technology.
+Thanks for ordering "${product}" from L.A Technology.
 
-      We will contact you shortly.
+We will contact you shortly.
 
-    Best regards,
-      L.A Technology
+Best regards,
+L.A Technology
       `
     });
 
@@ -86,14 +86,14 @@ app.post('/send', async (req, res) => {
       orderId: newOrder._id
     });
 
-      } catch (err) {
-      console.error("FULL ERROR:", err);
+  } catch (err) {
+    console.error("FULL ERROR:", err);
 
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack
-      });
-}})
+    res.status(500).json({
+      message: err.message
+    });
+  }
+});
 
 // ================== GET ORDERS ==================
 app.get('/orders', async (req, res) => {
@@ -101,14 +101,137 @@ app.get('/orders', async (req, res) => {
   res.json(orders);
 });
 
-
-
-// Serve index.html for root
+// ================== ROOT ==================
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// ================== START SERVER ==================
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
+
+
+
+
+
+
+
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const { Resend } = require('resend');
+// const resend = new Resend(process.env.RESEND_API_KEY);
+// const cors = require('cors');
+// require('dotenv').config();
+
+// const app = express();
+// app.use(cors({
+//   origin: "https://latechnology.netlify.app",
+//   methods: ["GET", "POST"],
+//   allowedHeaders: ["Content-Type"]
+// }));
+// app.use(express.json());
+
+// // ================== MONGODB ==================
+// mongoose.connect(process.env.MONGO_URI)
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch(err => console.log(err));
+
+// // ================== SCHEMA ==================
+// const OrderSchema = new mongoose.Schema({
+//   name: String,
+//   email: String,
+//   product: String,
+//   subject: String,
+//   message: String,
+//   paid: { type: Boolean, default: false },
+//   date: { type: Date, default: Date.now }
+// });
+
+// const Order = mongoose.model("Order", OrderSchema);
+
+
+// // ================== SEND ORDER ==================
+// app.post('/send', async (req, res) => {
+//   try {
+//     console.log("Incoming request:", req.body);
+
+//     const { name, email, subject, product, message } = req.body;
+
+//     // Save to DB
+//     const newOrder = await Order.create({
+//       name,
+//       email,
+//       subject,
+//       product,
+//       message
+//     });
+
+//     // ✅ Send email to YOU (admin)
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>", // temporary sender
+//       to: ["seyi1st2019@gmail.com"],
+//       subject: `New Order: ${product}`,
+//       text: `
+//       Name: ${name}
+//       Email: ${email}
+//       Product: ${product}
+//       Subject: ${subject}
+
+//       Message:
+//       ${message}
+//       `
+//     });
+
+//     // ✅ Auto reply to customer
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>",
+//       to: [email],
+//       subject: "Your Order has been received",
+//       text: `
+//       Hi ${name},
+
+//       Thanks for ordering "${product}" from L.A Technology.
+
+//       We will contact you shortly.
+
+//     Best regards,
+//       L.A Technology
+//       `
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       orderId: newOrder._id
+//     });
+
+//       } catch (err) {
+//       console.error("FULL ERROR:", err);
+
+//       res.status(500).json({
+//         message: err.message,
+//         stack: err.stack
+//       });
+// }})
+
+// // ================== GET ORDERS ==================
+// app.get('/orders', async (req, res) => {
+//   const orders = await Order.find().sort({ date: -1 });
+//   res.json(orders);
+// });
+
+
+
+// // Serve index.html for root
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'index.html'));
+// });
+
+// app.listen(3000, () => console.log("Server running on port 3000"));
 
 
 // app.listen(PORT, () => {
