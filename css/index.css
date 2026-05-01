@@ -592,8 +592,11 @@ Form style start
   display: none;
   background: #e6ffed;
   padding: 10px;
+  color: #067d3b;
   margin-bottom: 10px;
   border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
 }
 
 
