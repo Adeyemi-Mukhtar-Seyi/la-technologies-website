@@ -110,7 +110,7 @@
 //payment fucntion
 function payWithPaystack(email, product, formData) {
   let handler = PaystackPop.setup({
-    key: "pk_test_xxxxxxxxxxxxx",
+    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
     email: email,
     amount: 25000 * 100,
 
