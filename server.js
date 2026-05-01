@@ -50,50 +50,78 @@ app.post('/send', async (req, res) => {
       message
     });
 
-    await resend.emails.send({
-      from: "L.A Technology <onboarding@resend.dev>",
-      to: ["seyi1st2019@gmail.com"],
-      subject: `New Order: ${product}`,
-      text: `
-Name: ${name}
-Email: ${email}
-Product: ${product}
-Subject: ${subject}
-
-Message:
-${message}
-      `
-    });
-
-    await resend.emails.send({
-      from: "L.A Technology <onboarding@resend.dev>",
-      to: [email],
-      subject: "Your Order has been received",
-      text: `
-Hi ${name},
-
-Thanks for ordering "${product}" from L.A Technology.
-
-We will contact you shortly.
-
-Best regards,
-L.A Technology
-      `
-    });
-
     res.status(200).json({
       success: true,
       orderId: newOrder._id
     });
 
   } catch (err) {
-    console.error("FULL ERROR:", err);
+    console.error("ERROR HERE:", err);
 
     res.status(500).json({
       message: err.message
     });
   }
 });
+
+// app.post('/send', async (req, res) => {
+//   try {
+//     console.log("Incoming request:", req.body);
+
+//     const { name, email, subject, product, message } = req.body;
+
+//     const newOrder = await Order.create({
+//       name,
+//       email,
+//       subject,
+//       product,
+//       message
+//     });
+
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>",
+//       to: ["seyi1st2019@gmail.com"],
+//       subject: `New Order: ${product}`,
+//       text: `
+// Name: ${name}
+// Email: ${email}
+// Product: ${product}
+// Subject: ${subject}
+
+// Message:
+// ${message}
+//       `
+//     });
+
+//     await resend.emails.send({
+//       from: "L.A Technology <onboarding@resend.dev>",
+//       to: [email],
+//       subject: "Your Order has been received",
+//       text: `
+// Hi ${name},
+
+// Thanks for ordering "${product}" from L.A Technology.
+
+// We will contact you shortly.
+
+// Best regards,
+// L.A Technology
+//       `
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       orderId: newOrder._id
+//     });
+
+//   } catch (err) {
+//     console.error("FULL ERROR:", err);
+
+//     res.status(500).json({
+//       message: err.message
+//     });
+//   }
+// });
 
 // ================== GET ORDERS ==================
 app.get('/orders', async (req, res) => {
