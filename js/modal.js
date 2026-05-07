@@ -462,6 +462,7 @@
     );
 
   });
+})
 
 
 
@@ -473,113 +474,113 @@
 
   function payWithPaystack(email, product, amount, formData) {
 
-  const btn = form.querySelector(".submit-btn");
-  const btnText = btn.querySelector(".btn-text");
+        const btn = form.querySelector(".submit-btn");
+        const btnText = btn.querySelector(".btn-text");
 
-  let handler = PaystackPop.setup({
+        let handler = PaystackPop.setup({
 
-    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
+          key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
 
-    email: email,
+          email: email,
 
-    amount: amount * 100,
+          amount: amount * 100,
 
-    currency: "NGN",
+          currency: "NGN",
 
-    callback: function (response) {
+          callback: function (response) {
 
-      console.log("Payment successful:", response.reference);
+            console.log("Payment successful:", response.reference);
 
-      fetch("https://la-tech-backend.onrender.com/send", {
+            fetch("https://la-tech-backend.onrender.com/send", {
 
-        method: "POST",
+              method: "POST",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+              headers: {
+                "Content-Type": "application/json"
+              },
 
-        body: JSON.stringify({
-          ...formData,
-          paymentReference: response.reference
-        })
+              body: JSON.stringify({
+                ...formData,
+                paymentReference: response.reference
+              })
 
-      })
+            })
 
-      .then(res => {
+            .then(res => {
 
-        if (!res.ok) {
-          throw new Error("Failed to send order");
-        }
+              if (!res.ok) {
+                throw new Error("Failed to send order");
+              }
 
-        return res.json();
-      })
+              return res.json();
+            })
 
-      .then(() => {
+            .then(() => {
 
-        successMsg.innerHTML = `
-          <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
-            ✅ Payment successful for ${product}. We will contact you shortly.
-          </div>
-        `;
+              successMsg.innerHTML = `
+                <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
+                  ✅ Payment successful for ${product}. We will contact you shortly.
+                </div>
+              `;
 
-        successMsg.style.display = "block";
+              successMsg.style.display = "block";
 
-        form.reset();
+              form.reset();
 
-        totalPrice.value = "";
+              totalPrice.value = "";
 
-        btn.classList.remove("loading");
+              btn.classList.remove("loading");
 
-        btn.disabled = false;
+              btn.disabled = false;
 
-        btnText.textContent = "Proceed to Payment";
+              btnText.textContent = "Proceed to Payment";
 
-        setTimeout(() => {
+              setTimeout(() => {
 
-          modal.classList.remove("active");
+                modal.classList.remove("active");
 
-          document.body.style.overflow = "auto";
+                document.body.style.overflow = "auto";
 
-          successMsg.style.display = "none";
+                successMsg.style.display = "none";
 
-        }, 3000);
+              }, 3000);
 
-      })
+            })
 
-      .catch(err => {
+            .catch(err => {
 
-        console.error(err);
+              console.error(err);
 
-        successMsg.innerHTML = `
-          <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
-            ❌ Payment succeeded but order failed to send.
-          </div>
-        `;
+              successMsg.innerHTML = `
+                <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
+                  ❌ Payment succeeded but order failed to send.
+                </div>
+              `;
 
-        successMsg.style.display = "block";
+              successMsg.style.display = "block";
 
-        btn.classList.remove("loading");
+              btn.classList.remove("loading");
 
-        btn.disabled = false;
+              btn.disabled = false;
 
-        btnText.textContent = "Proceed to Payment";
-      });
-    },
+              btnText.textContent = "Proceed to Payment";
+            });
+          },
 
-    onClose: function () {
+          onClose: function () {
 
-      btn.classList.remove("loading");
+            btn.classList.remove("loading");
 
-      btn.disabled = false;
+            btn.disabled = false;
 
-      btnText.textContent = "Proceed to Payment";
+            btnText.textContent = "Proceed to Payment";
 
-      console.log("Payment window closed");
-    }
+            console.log("Payment window closed");
+          }
 
-  });
+        });
 
-  handler.openIframe();
+        handler.openIframe();
 }
 
 
