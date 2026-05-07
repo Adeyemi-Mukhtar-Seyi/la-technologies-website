@@ -109,6 +109,7 @@
 
 //payment fucntion
 function payWithPaystack(email, product, formData) {
+  const successMsg = document.getElementById("successMessage");
   let handler = PaystackPop.setup({
     key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
     email: email,
