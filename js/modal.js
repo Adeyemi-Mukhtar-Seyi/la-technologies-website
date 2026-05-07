@@ -473,145 +473,114 @@
 
   function payWithPaystack(email, product, amount, formData) {
 
-    let handler = PaystackPop.setup({
+  const btn = form.querySelector(".submit-btn");
+  const btnText = btn.querySelector(".btn-text");
 
-      key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
+  let handler = PaystackPop.setup({
 
-      email: email,
+    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
 
-      amount: amount * 100,
+    email: email,
 
-      currency: "NGN",
+    amount: amount * 100,
 
+    currency: "NGN",
 
+    callback: function (response) {
 
-      callback: async function (response) {
+      console.log("Payment successful:", response.reference);
 
-        try {
+      fetch("https://la-tech-backend.onrender.com/send", {
 
-          const res = await fetch(
-            "https://la-tech-backend.onrender.com/send",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                ...formData,
-                paymentReference: response.reference
-              })
-            }
-          );
+        method: "POST",
 
+        headers: {
+          "Content-Type": "application/json"
+        },
 
+        body: JSON.stringify({
+          ...formData,
+          paymentReference: response.reference
+        })
 
-          if (!res.ok) {
-            throw new Error("Failed to send order");
-          }
+      })
 
+      .then(res => {
 
-
-          successMsg.innerHTML = `
-            <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
-              ✅ Payment successful for ${product}. We will contact you shortly.
-            </div>
-          `;
-
-
-
-          successMsg.style.display = "block";
-
-
-
-          form.reset();
-
-          totalPrice.value = "";
-
-
-
-          const btn = form.querySelector(".submit-btn");
-
-          const btnText = btn.querySelector(".btn-text");
-
-
-
-          btn.classList.remove("loading");
-
-          btn.disabled = false;
-
-          btnText.textContent = "Proceed to Payment";
-
-
-
-          setTimeout(() => {
-
-            modal.classList.remove("active");
-
-            document.body.style.overflow = "auto";
-
-            successMsg.style.display = "none";
-
-          }, 3000);
-
-
-
-        } catch (err) {
-
-          console.error(err);
-
-
-
-          successMsg.innerHTML = `
-            <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
-              ❌ Payment succeeded but order failed to send.
-            </div>
-          `;
-
-
-
-          successMsg.style.display = "block";
-
-
-
-          const btn = form.querySelector(".submit-btn");
-
-          const btnText = btn.querySelector(".btn-text");
-
-
-
-          btn.classList.remove("loading");
-
-          btn.disabled = false;
-
-          btnText.textContent = "Proceed to Payment";
+        if (!res.ok) {
+          throw new Error("Failed to send order");
         }
-      },
 
+        return res.json();
+      })
 
+      .then(() => {
 
-      onClose: function () {
+        successMsg.innerHTML = `
+          <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
+            ✅ Payment successful for ${product}. We will contact you shortly.
+          </div>
+        `;
 
-        const btn = form.querySelector(".submit-btn");
+        successMsg.style.display = "block";
 
-        const btnText = btn.querySelector(".btn-text");
+        form.reset();
 
-
+        totalPrice.value = "";
 
         btn.classList.remove("loading");
 
         btn.disabled = false;
 
         btnText.textContent = "Proceed to Payment";
-      }
-    });
 
+        setTimeout(() => {
 
+          modal.classList.remove("active");
 
-    handler.openIframe();
-  }
+          document.body.style.overflow = "auto";
 
-})();
+          successMsg.style.display = "none";
 
+        }, 3000);
+
+      })
+
+      .catch(err => {
+
+        console.error(err);
+
+        successMsg.innerHTML = `
+          <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
+            ❌ Payment succeeded but order failed to send.
+          </div>
+        `;
+
+        successMsg.style.display = "block";
+
+        btn.classList.remove("loading");
+
+        btn.disabled = false;
+
+        btnText.textContent = "Proceed to Payment";
+      });
+    },
+
+    onClose: function () {
+
+      btn.classList.remove("loading");
+
+      btn.disabled = false;
+
+      btnText.textContent = "Proceed to Payment";
+
+      console.log("Payment window closed");
+    }
+
+  });
+
+  handler.openIframe();
+}
 
 
 
