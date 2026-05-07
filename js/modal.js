@@ -223,90 +223,92 @@
         }
       );
   })
+  
+          function updatePrice() {
+
+          productType.addEventListener("change", updatePrice);
+          quantityInput.addEventListener("input", updatePrice);
+
+          const product = productInput.value;
+          const type = productType.value;
+          const quantity = parseInt(quantityInput.value) || 1;
+
+          let basePrice = 0;
+
+          // LOGO
+          if (product === "Logo Design") {
+            basePrice = pricing.logoDesign?.[type];
+          }
+
+          // BUSINESS CARD
+          if (product === "Business Card") {
+            basePrice = pricing.businessCard[type];
+          }
+
+          // FLYER
+          if (product === "Flyer Design and Printing") {
+            basePrice = pricing.flyerDesignAndPrinting[type];
+          }
+
+          // OFFICE LETTERHEAD
+          if (product === "Office Letterhead") {
+            basePrice = pricing.officeLetterhead[type];
+          }
+
+          // PAPER BAG
+          if (product === "Paper Bag") {
+            basePrice = pricing.paperBag[type];
+          }
+
+          // NOTEPAD
+          if (product === "Notepad Design and Printing") {
+            basePrice = pricing.notepadDesignAndPrinting[type];
+          }
+
+          // BILLBOARD POSTER
+          if (product === "Billboard Poster") {
+            basePrice = pricing.billboardPoster[type];
+          }
+
+          // BUS BRANDING
+          if (product === "Bus Branding and Design") {
+            basePrice = pricing.busBrandingAndDesign[type];
+          }
+
+          // POSTER
+          if (product === "Poster") {
+            basePrice = pricing.poster[type];
+          }
+
+          // NYLON BAG
+          if (product === "Nylon Bag") {
+            basePrice = pricing.nylonBag[type];
+          }
+
+          // ROLLUP BANNER
+          if (product === "Rollup Banner") {
+            basePrice = pricing.rollupBanner[type];
+          }
+
+          // TABLE CALENDAR
+          if (product === "Table Calendar") {
+            basePrice = pricing.tableCalendar[type];
+          }
+
+        if (!basePrice) {
+          console.warn("Missing price for:", product, type);
+          return;
+        }
+
+          const total = basePrice * quantity;
+
+          totalPrice.value = "₦" + total.toLocaleString();
+        }
 
 })();
 
 
-productType.addEventListener("change", updatePrice);
-quantityInput.addEventListener("input", updatePrice);
 
-function updatePrice() {
-
-  const product = productInput.value;
-  const type = productType.value;
-  const quantity = parseInt(quantityInput.value) || 1;
-
-  let basePrice = 0;
-
-  // LOGO
-  if (product === "Logo Design") {
-    basePrice = pricing.logoDesign?.[type];
-  }
-
-  // BUSINESS CARD
-  if (product === "Business Card") {
-    basePrice = pricing.businessCard[type];
-  }
-
-  // FLYER
-  if (product === "Flyer Design and Printing") {
-    basePrice = pricing.flyerDesignAndPrinting[type];
-  }
-
-  // OFFICE LETTERHEAD
-  if (product === "Office Letterhead") {
-    basePrice = pricing.officeLetterhead[type];
-  }
-
-  // PAPER BAG
-  if (product === "Paper Bag") {
-    basePrice = pricing.paperBag[type];
-  }
-
-  // NOTEPAD
-  if (product === "Notepad Design and Printing") {
-    basePrice = pricing.notepadDesignAndPrinting[type];
-  }
-
-  // BILLBOARD POSTER
-  if (product === "Billboard Poster") {
-    basePrice = pricing.billboardPoster[type];
-  }
-
-  // BUS BRANDING
-  if (product === "Bus Branding and Design") {
-    basePrice = pricing.busBrandingAndDesign[type];
-  }
-
-  // POSTER
-  if (product === "Poster") {
-    basePrice = pricing.poster[type];
-  }
-
-  // NYLON BAG
-  if (product === "Nylon Bag") {
-    basePrice = pricing.nylonBag[type];
-  }
-
-  // ROLLUP BANNER
-  if (product === "Rollup Banner") {
-    basePrice = pricing.rollupBanner[type];
-  }
-
-  // TABLE CALENDAR
-  if (product === "Table Calendar") {
-    basePrice = pricing.tableCalendar[type];
-  }
-
- if (!basePrice) {
-  console.warn("Missing price for:", product, type);
-  return;
-}
-
-  const total = basePrice * quantity;
-
-  totalPrice.value = "₦" + total.toLocaleString();
-}
 
 
   const pricing = {
