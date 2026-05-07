@@ -375,26 +375,27 @@
 
 
   // PAYSTACK FUNCTION
-  function payWithPaystack(email, product, amount, formData) {
+function payWithPaystack(email, product, amount, formData) {
 
-    let handler = PaystackPop.setup({
+  let handler = PaystackPop.setup({
 
-      key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
+    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
 
-      email: email,
+    email: email,
 
-      amount: amount * 100,
+    amount: amount * 100,
 
-      currency: "NGN",
+    currency: "NGN",
 
-      callback: async function (response) {
+    callback: async function(response) {
 
-        console.log("Payment successful:", response.reference);
+      console.log("Payment successful:", response.reference);
 
-        try {
+      try {
 
-          const res = await fetch("https://la-tech-backend.onrender.com/send", {
-
+        const res = await fetch(
+          "https://la-tech-backend.onrender.com/send",
+          {
             method: "POST",
 
             headers: {
@@ -405,63 +406,26 @@
               ...formData,
               paymentReference: response.reference
             })
-          });
-
-          if (!res.ok) {
-            throw new Error("Failed to send order");
           }
+        );
 
-          successMsg.innerHTML = `
-            <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
-              ✅ Payment successful for ${product}. We will contact you shortly.
-            </div>
-          `;
-
-          successMsg.style.display = "block";
-
-          form.reset();
-
-          totalPrice.value = "";
-
-          const btn = form.querySelector(".submit-btn");
-          const btnText = btn.querySelector(".btn-text");
-
-          btn.classList.remove("loading");
-          btn.disabled = false;
-          btnText.textContent = "Proceed to Payment";
-
-          setTimeout(() => {
-
-            modal.classList.remove("active");
-
-            document.body.style.overflow = "auto";
-
-            successMsg.style.display = "none";
-
-          }, 3000);
-
-        } catch (err) {
-
-          console.error(err);
-
-          successMsg.innerHTML = `
-            <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
-              ❌ Payment succeeded but order failed to send.
-            </div>
-          `;
-
-          successMsg.style.display = "block";
-
-          const btn = form.querySelector(".submit-btn");
-          const btnText = btn.querySelector(".btn-text");
-
-          btn.classList.remove("loading");
-          btn.disabled = false;
-          btnText.textContent = "Proceed to Payment";
+        if (!res.ok) {
+          throw new Error("Failed to send order");
         }
-      },
 
-      onClose: function () {
+        successMsg.innerHTML = `
+          <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
+            ✅ Payment successful for ${product}. We will contact you shortly.
+          </div>
+        `;
+
+        successMsg.style.display = "block";
+
+        form.reset();
+
+        totalPrice.value = "";
+
+        paymentInProgress = false;
 
         const btn = form.querySelector(".submit-btn");
         const btnText = btn.querySelector(".btn-text");
@@ -470,14 +434,160 @@
         btn.disabled = false;
         btnText.textContent = "Proceed to Payment";
 
-        console.log("Payment window closed");
+        setTimeout(() => {
+
+          modal.classList.remove("active");
+
+          document.body.style.overflow = "auto";
+
+          successMsg.style.display = "none";
+
+        }, 3000);
+
+      } catch (err) {
+
+        console.error(err);
+
+        paymentInProgress = false;
+
+        successMsg.innerHTML = `
+          <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
+            ❌ Payment succeeded but order failed to send.
+          </div>
+        `;
+
+        successMsg.style.display = "block";
+
+        const btn = form.querySelector(".submit-btn");
+        const btnText = btn.querySelector(".btn-text");
+
+        btn.classList.remove("loading");
+        btn.disabled = false;
+        btnText.textContent = "Proceed to Payment";
       }
-    });
+    },
 
-    handler.openIframe();
-  }
+    onClose: function() {
 
-})();
+      paymentInProgress = false;
+
+      const btn = form.querySelector(".submit-btn");
+      const btnText = btn.querySelector(".btn-text");
+
+      btn.classList.remove("loading");
+      btn.disabled = false;
+      btnText.textContent = "Proceed to Payment";
+
+      console.log("Payment window closed");
+    }
+  });
+
+  handler.openIframe();
+}
+
+//   function payWithPaystack(email, product, amount, formData) {
+
+//     let handler = PaystackPop.setup({
+
+//       key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
+
+//       email: email,
+
+//       amount: amount * 100,
+
+//       currency: "NGN",
+
+//       callback: async function (response) {
+
+//         console.log("Payment successful:", response.reference);
+
+//         try {
+
+//           const res = await fetch("https://la-tech-backend.onrender.com/send", {
+
+//             method: "POST",
+
+//             headers: {
+//               "Content-Type": "application/json"
+//             },
+
+//             body: JSON.stringify({
+//               ...formData,
+//               paymentReference: response.reference
+//             })
+//           });
+
+//           if (!res.ok) {
+//             throw new Error("Failed to send order");
+//           }
+
+//           successMsg.innerHTML = `
+//             <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
+//               ✅ Payment successful for ${product}. We will contact you shortly.
+//             </div>
+//           `;
+
+//           successMsg.style.display = "block";
+
+//           form.reset();
+
+//           totalPrice.value = "";
+
+//           const btn = form.querySelector(".submit-btn");
+//           const btnText = btn.querySelector(".btn-text");
+
+//           btn.classList.remove("loading");
+//           btn.disabled = false;
+//           btnText.textContent = "Proceed to Payment";
+
+//           setTimeout(() => {
+
+//             modal.classList.remove("active");
+
+//             document.body.style.overflow = "auto";
+
+//             successMsg.style.display = "none";
+
+//           }, 3000);
+
+//         } catch (err) {
+
+//           console.error(err);
+
+//           successMsg.innerHTML = `
+//             <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
+//               ❌ Payment succeeded but order failed to send.
+//             </div>
+//           `;
+
+//           successMsg.style.display = "block";
+
+//           const btn = form.querySelector(".submit-btn");
+//           const btnText = btn.querySelector(".btn-text");
+
+//           btn.classList.remove("loading");
+//           btn.disabled = false;
+//           btnText.textContent = "Proceed to Payment";
+//         }
+//       },
+
+//       onClose: function () {
+
+//         const btn = form.querySelector(".submit-btn");
+//         const btnText = btn.querySelector(".btn-text");
+
+//         btn.classList.remove("loading");
+//         btn.disabled = false;
+//         btnText.textContent = "Proceed to Payment";
+
+//         console.log("Payment window closed");
+//       }
+//     });
+
+//     handler.openIframe();
+//   }
+
+// })();
 
 
 
