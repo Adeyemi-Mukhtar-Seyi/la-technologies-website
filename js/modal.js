@@ -7,7 +7,6 @@
   const productInput = document.getElementById("productInput");
   const successMsg = document.getElementById("successMessage");
 
-  console.log("MODAL JS LOADED");
 
   // OPEN MODAL
   buttons.forEach(btn => {
@@ -45,421 +44,107 @@
 
   // SUBMIT FORM
   form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const btn = form.querySelector(".submit-btn");
-    const btnText = btn.querySelector(".btn-text");
+        const btn = form.querySelector(".submit-btn");
+        const btnText = btn.querySelector(".btn-text");
 
-    btn.classList.add("loading");
-    btnText.textContent = "Sending...";
-    btn.disabled = true;
+        btn.classList.add("loading");
+        btnText.textContent = "Sending...";
+        btn.disabled = true;
 
-    try {
-      const res = await fetch("https://la-tech-backend.onrender.com/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: form.name.value,
-          email: form.email.value,
-          subject: form.subject.value,
-          product: form.product.value,
-          message: form.message.value
-        })
-      });
-
-      if (res.ok) {
-            
-            payWithPaystack(
-                form.email.value,
-                form.product.value,
-                {
-                    name: form.name.value,
-                    email: form.email.value,
-                    subject: form.subject.value,
-                    product: form.product.value,
-                    message: form.message.value
-                }
-            );
-            //form.reset();
-            // successMsg.innerHTML = `
-            //     <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
-            //     ✅ Your request has been sent successfully!
-            //     </div>
-            // `;
-            // successMsg.style.display = "none";
-            // form.style.display = "flex";
-            
-        }
-
-    } catch (err) {
-      successMsg.textContent = "❌ Failed to send message. Try again.";
-      successMsg.style.display = "block";
-    }
-
-    btn.classList.remove("loading");
-    btn.disabled = false;
-    btnText.textContent = "Send Message";
-  });
-
+        payWithPaystack(
+          form.email.value,
+          form.product.value,
+          {
+            name: form.name.value,
+            email: form.email.value,
+            subject: form.subject.value,
+            product: form.product.value,
+            message: form.message.value
+          }
+        )
+  })
 
 })();
 
 
 //payment fucntion
-function payWithPaystack(email, product, formData) {
+function payWithPaystack(email, product, amount, formData) {
   const successMsg = document.getElementById("successMessage");
+  const form = document.getElementById("contactForm");
+  const modal = document.getElementById("modal");
+
   let handler = PaystackPop.setup({
     key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
     email: email,
-    amount: 25000 * 100,
+    amount: amount * 100,
 
-    callback: function (response) {
 
-      console.log("Payment successful:", response.reference);
+    callback: async function (response) {
 
-      // ✅ SHOW SUCCESS MESSAGE
-      successMsg.innerHTML = `
-        <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
-          ✅ Thanks for ordering ${product}! We will contact you shortly.
-        </div>
-      `;
-      successMsg.style.display = "block";
+  console.log("Payment successful:", response.reference);
 
-      // ✅ CLEAR FORM
-      form.reset();
+  try {
 
-      // ✅ RESET BUTTON
-      const btn = form.querySelector(".submit-btn");
-      const btnText = btn.querySelector(".btn-text");
+    // SEND TO BACKEND AFTER PAYMENT
+    const res = await fetch("https://la-tech-backend.onrender.com/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...formData,
+        paymentReference: response.reference
+      })
+    });
 
-      btn.classList.remove("loading");
-      btn.disabled = false;
-      btnText.textContent = "Send Message";
-
-      // ✅ CLOSE MODAL AFTER DELAY
-      setTimeout(() => {
-        modal.classList.remove("active");
-        document.body.style.overflow = "auto";
-        successMsg.style.display = "none";
-      }, 4000);
-    },
-
-    onClose: function () {
-      console.log("Payment cancelled");
+    if (!res.ok) {
+      throw new Error("Failed to send order");
     }
+
+    // SUCCESS MESSAGE
+    successMsg.innerHTML = `
+      <div style="padding:15px; background:#e6ffed; color:#0f5132; border-radius:6px;">
+        ✅ Payment successful for ${product}! We will contact you shortly.
+      </div>
+    `;
+
+    successMsg.style.display = "block";
+
+    // RESET FORM
+    form.reset();
+
+    // RESET BUTTON
+    const btn = form.querySelector(".submit-btn");
+    const btnText = btn.querySelector(".btn-text");
+
+    btn.classList.remove("loading");
+    btn.disabled = false;
+    btnText.textContent = "Send Message";
+
+    // CLOSE MODAL
+    setTimeout(() => {
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+      successMsg.style.display = "none";
+    }, 4000);
+
+  } catch (err) {
+
+    console.error(err);
+
+    successMsg.innerHTML = `
+      <div style="padding:15px; background:#ffe6e6; color:#842029; border-radius:6px;">
+        ❌ Payment succeeded but order failed to send.
+      </div>
+    `;
+
+    successMsg.style.display = "block";
+  }
+}
   });
 
   handler.openIframe();
 }
 
-// function payWithPaystack(email, product) {
-
-//   // 💰 SET PRICE BASED ON PRODUCT
-//   let amount = 25000; // default
-
-//   if (product.includes("Business Card")) amount = 6000;
-//   if (product.includes("Flyer")) amount = 43500;
-//   if (product.includes("Logo")) amount = 25000;
-
-//   let handler = PaystackPop.setup({
-//     key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
-//     email: email,
-//     amount: amount * 100, // kobo
-//     currency: "NGN",
-
-//     callback: function(response) {
-//       alert("Payment successful! Ref: " + response.reference);
-//     },
-
-//     onClose: function() {
-//       alert("Payment cancelled");
-//     }
-//   });
-
-//   handler.openIframe();
-// }
-
-
-
-// (function () {
-//   console.log("JS Loaded");
-
-//   const modal = document.getElementById("modal");
-//   const closeBtn = document.getElementById("closeModal");
-//   const buttons = document.querySelectorAll(".order-btn");
-//   const form = document.getElementById("contactForm");
-//   const productInput = document.getElementById("productInput");
-
-//   console.log("Buttons found:", buttons.length);
-
-//   // Open modal
-//   buttons.forEach(btn => {
-//     btn.addEventListener("click", () => {
-//       console.log("Button clicked");
-//       modal.classList.add("active");
-//       document.body.style.overflow = "hidden";
-//     });
-//   });
-
-  
-
-//         buttons.forEach(btn => {
-//         btn.addEventListener("click", () => {
-//             const productName = btn.getAttribute("data-product");
-
-//             productInput.value = productName;
-
-//             modal.classList.add("active");
-//             document.body.style.overflow = "hidden";
-//         });
-//         });
-
-//   // Close modal (X button)
-//   if (closeBtn) {
-//     closeBtn.addEventListener("click", () => {
-//       modal.classList.remove("active");
-//       document.body.style.overflow = "auto";
-//       successMsg.style.display = "none";
-//       form.style.display = "none";
-//     });
-//   }
-
-//   // Close when clicking outside
-//   if (modal) {
-//     modal.addEventListener("click", (e) => {
-//       if (e.target === modal) {
-//         modal.classList.remove("active");
-//         document.body.style.overflow = "auto";
-//       }
-//     });
-//   }
-
-//   // Form submit
-//   if (form) {
-//     form.addEventListener("submit", async (e) => {
-//       e.preventDefault();
-//       const successMsg = document.getElementById("successMessage");
-//       const btn = form.querySelector(".submit-btn");
-//       const btnText = btn.querySelector(".btn-text");
-      
-
-
-//       btn.classList.add("loading");
-//       btnText.textContent = "Sending...";
-//       btn.disabled = true;
-
-        
-//       try {
-//         const res = await fetch("https://la-tech-backend.onrender.com/send", {
-//           method: "POST",
-//           headers: { "Content-Type": "application/json" },
-//           body: JSON.stringify({
-//             name: form.name.value,
-//             email: form.email.value,
-//             subject: form.subject.value,
-//             product: form.product.value,
-//             message: form.message.value,
-//           }),
-//         });
-
-//         const data = await res.json();
-
-//         if (res.ok) {
-//           btn.classList.remove("loading");
-//           successMsg.style.display = "block";
-//           form.style.display = "none";
-//         //   btn.classList.add("success");
-//         //   btnText.textContent = "Sent";
-
-//           form.reset();
-
-//             successMsg.textContent = "✅ Your request has been sent successfully!";
-//             successMsg.style.display = "block";
-
-//             form.style.display = "none";
-
-
-//           setTimeout(() => {
-//             modal.classList.remove("active");
-//             document.body.style.overflow = "auto";
-//             btn.classList.remove("success");
-//             btnText.textContent = "Send Message";
-//           }, 6000);
-//         } else {
-//           throw new Error(data.message);
-//         }
-//       } catch (err) {
-//         alert("Failed to send message");
-//       }
-
-//       btn.classList.remove("loading");
-//       btn.disabled = false;
-//     });
-//   }
-
-// })();
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const modal = document.getElementById("modal");
-//   const closeBtn = document.getElementById("closeModal");
-//   const form = document.getElementById("contactForm");
-
-//   // ✅ SELECT ALL BUTTONS (not single ID)
-//   const openButtons = document.querySelectorAll(".open-modal");
-
-//   // OPEN MODAL
-//   openButtons.forEach(btn => {
-//     btn.addEventListener("click", () => {
-//       modal.classList.add("active");
-//       document.body.style.overflow = "hidden";
-//     });
-//   });
-
-//   // CLOSE MODAL (X BUTTON)
-//   closeBtn.addEventListener("click", () => {
-//     modal.classList.remove("active");
-//     document.body.style.overflow = "auto";
-//   });
-
-//   // CLOSE WHEN CLICKING OUTSIDE
-//   modal.addEventListener("click", (e) => {
-//     if (e.target === modal) {
-//       modal.classList.remove("active");
-//       document.body.style.overflow = "auto";
-//     }
-//   });
-
-//   // =========================
-//   // FORM SUBMIT
-//   // =========================
-//   form.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-
-//     const btn = form.querySelector(".submit-btn");
-//     const btnText = btn.querySelector(".btn-text");
-
-//     btn.classList.add("loading");
-//     btnText.textContent = "Sending...";
-//     btn.disabled = true;
-
-//     try {
-//       const res = await fetch("https://la-tech-backend.onrender.com/send", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//           name: form.name.value,
-//           email: form.email.value,
-//           subject: form.subject.value,
-//           message: form.message.value
-//         })
-//       });
-
-//       const data = await res.json();
-
-//       if (res.ok) {
-//         btn.classList.remove("loading");
-//         btn.classList.add("success");
-//         btnText.textContent = "Sent";
-
-//         form.reset();
-
-//         setTimeout(() => {
-//           modal.classList.remove("active");
-//           document.body.style.overflow = "auto";
-
-//           // Reset button
-//           btn.classList.remove("success");
-//           btnText.textContent = "Send Message";
-//         }, 1500);
-
-//       } else {
-//         throw new Error(data.message);
-//       }
-
-//     } catch (err) {
-//       alert("Failed to send message");
-//     }
-
-//     btn.classList.remove("loading");
-//     btn.disabled = false;
-//   });
-// });
-
-
-
-// const modal = document.getElementById("modal");
-// const openBtn = document.getElementById("openModalBtn");
-// const closeBtn = document.getElementById("closeModal");
-// const form = document.getElementById("contactForm");
-
-// openBtn.onclick = () => {
-//   modal.classList.add("active");
-//   document.body.style.overflow = "hidden";
-// };
-
-// closeBtn.onclick = () => {
-//   modal.classList.remove("active");
-//   document.body.style.overflow = "auto";
-// };
-
-// modal.addEventListener("click", (e) => {
-//   if (e.target === modal) {
-//     modal.classList.remove("active");
-//     document.body.style.overflow = "auto";
-//   }
-// });
-
-// // FORM SUBMIT
-// form.addEventListener("submit", async (e) => {
-//   e.preventDefault();
-
-//   const btn = form.querySelector(".submit-btn");
-//   const btnText = btn.querySelector(".btn-text");
-
-//   btn.classList.add("loading");
-//   btnText.textContent = "Sending...";
-//   btn.disabled = true;
-
-//   try {
-//     const res = await fetch("https://la-tech-backend.onrender.com/send", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify({
-//         name: form.name.value,
-//         email: form.email.value,
-//         subject: form.subject.value,
-//         message: form.message.value
-//       })
-//     });
-
-//     const data = await res.json();
-
-//     if (res.ok) {
-//       btn.classList.remove("loading");
-//       btn.classList.add("success");
-//       btnText.textContent = "Sent";
-
-//       form.reset();
-
-//       setTimeout(() => {
-//         modal.classList.remove("active");
-//         document.body.style.overflow = "auto";
-//       }, 1500);
-
-//     } else {
-//       throw new Error(data.message);
-//     }
-
-//   } catch (err) {
-//     alert("Failed to send message");
-//   }
-
-//   btn.classList.remove("loading");
-//   btn.disabled = false;
-// });
