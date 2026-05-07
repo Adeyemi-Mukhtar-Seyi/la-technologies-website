@@ -392,6 +392,128 @@
         <!--Footer Section End-->
 
         <!-- Form modal -->
+          <div id="modal">
+            <div class="modal-content">
+
+              <button id="closeModal" class="modal-close">×</button>
+
+              <div id="successMessage" class="success-message"></div>
+
+              <form id="contactForm" class="contact-form">
+
+                <!-- CUSTOMER NAME -->
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                >
+
+                <!-- CUSTOMER EMAIL -->
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  required
+                >
+
+                <!-- PRODUCT -->
+                <input
+                  type="text"
+                  name="product"
+                  id="productInput"
+                  readonly
+                >
+
+                <!-- PRODUCT TYPE -->
+                <div class="form-group">
+
+                  <label>Select Product Type</label>
+
+                  <select id="productType" name="type" required>
+
+                    <option value="">
+                      Select Type
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <!-- MATERIAL -->
+                <div class="form-group">
+
+                  <label>Select Material / Size</label>
+
+                  <select id="productMaterial" name="material">
+
+                    <option value="">
+                      Select Material
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <!-- QUANTITY -->
+                <div class="form-group">
+
+                  <label>Quantity</label>
+
+                  <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    value="1"
+                    required
+                  >
+
+                </div>
+
+                <!-- SUBJECT -->
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  required
+                >
+
+                <!-- MESSAGE -->
+                <textarea
+                  name="message"
+                  placeholder="Additional Details"
+                ></textarea>
+
+                <!-- TOTAL -->
+                <div class="form-group">
+
+                  <label>Total Price</label>
+
+                  <input
+                    type="text"
+                    id="totalPrice"
+                    readonly
+                    placeholder="₦0"
+                  >
+
+                </div>
+
+                <!-- SUBMIT -->
+                <button type="submit" class="submit-btn">
+
+                  <span class="btn-text">
+                    Proceed to Payment
+                  </span>
+
+                </button>
+
+              </form>
+
+            </div>
+          </div>
+
+        <!-- Form modal
         <div id="modal">
             <div class="modal-content">
 
@@ -414,7 +536,7 @@
                   </button>
                 </form>
             </div>
-        </div>
+        </div> -->
         
         <script src="https://js.paystack.co/v1/inline.js"></script>
         <script src="js/LA.js"></script>
