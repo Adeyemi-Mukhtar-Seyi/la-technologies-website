@@ -12,6 +12,12 @@
   const quantityInput = document.getElementById("quantity");
   const totalPrice = document.getElementById("totalPrice");
 
+
+
+  // =========================
+  // PRICING
+  // =========================
+
   const pricing = {
 
     logoDesign: {
@@ -96,7 +102,11 @@
   };
 
 
+
+  // =========================
   // OPEN MODAL
+  // =========================
+
   buttons.forEach(btn => {
 
     btn.addEventListener("click", () => {
@@ -108,17 +118,24 @@
       form.subject.value = "Order for " + productName;
 
       productType.innerHTML = '<option value="">Select Type</option>';
+
       productMaterial.innerHTML = '<option value="">Select Material</option>';
 
       quantityInput.value = 1;
+
       totalPrice.value = "";
+
+
 
       // LOGO DESIGN
       if (productName === "Logo Design") {
+
         productType.innerHTML += `
           <option value="standard">Standard Logo Design</option>
         `;
       }
+
+
 
       // BUSINESS CARD
       if (productName === "Business Card") {
@@ -131,6 +148,8 @@
           <option value="doubleSided400gsm100">Double Sided 400gsm (100)</option>
         `;
       }
+
+
 
       // FLYERS
       if (productName === "Flyer Design and Printing") {
@@ -145,6 +164,8 @@
         `;
       }
 
+
+
       // OFFICE LETTERHEAD
       if (productName === "Office Letterhead") {
 
@@ -152,6 +173,8 @@
           <option value="a4_100">A4 (100 Copies)</option>
         `;
       }
+
+
 
       // PAPER BAG
       if (productName === "Paper Bag") {
@@ -162,6 +185,8 @@
           <option value="a3_50">A3 (50 Copies)</option>
         `;
       }
+
+
 
       // NOTEPAD
       if (productName === "Notepad Design and Printing") {
@@ -177,7 +202,9 @@
         `;
       }
 
-      // BILLBOARD POSTER
+
+
+      // BILLBOARD
       if (productName === "Billboard Poster") {
 
         productType.innerHTML += `
@@ -187,6 +214,8 @@
           <option value="stickerSmall">Sticker Small Machine per ft</option>
         `;
       }
+
+
 
       // BUS BRANDING
       if (productName === "Bus Branding and Design") {
@@ -200,6 +229,8 @@
         `;
       }
 
+
+
       // POSTER
       if (productName === "Poster") {
 
@@ -207,6 +238,8 @@
           <option value="poster100">150gsm Matte (100 Copies)</option>
         `;
       }
+
+
 
       // NYLON BAG
       if (productName === "Nylon Bag") {
@@ -218,7 +251,9 @@
         `;
       }
 
-      // ROLLUP BANNER
+
+
+      // ROLLUP
       if (productName === "Rollup Banner") {
 
         productType.innerHTML += `
@@ -227,6 +262,8 @@
           <option value="fourFt">4ft Size</option>
         `;
       }
+
+
 
       // TABLE CALENDAR
       if (productName === "Table Calendar") {
@@ -237,52 +274,75 @@
         `;
       }
 
+
+
       modal.classList.add("active");
+
       document.body.style.overflow = "hidden";
 
       successMsg.style.display = "none";
+
       form.style.display = "flex";
+
     });
+
   });
 
 
+
+  // =========================
   // CLOSE MODAL
+  // =========================
+
   closeBtn.addEventListener("click", () => {
 
     modal.classList.remove("active");
-    document.body.style.overflow = "auto";
 
-    successMsg.style.display = "none";
-    form.style.display = "flex";
+    document.body.style.overflow = "auto";
   });
 
 
+
+  // =========================
   // CLICK OUTSIDE
+  // =========================
+
   modal.addEventListener("click", (e) => {
 
     if (e.target === modal) {
+
       modal.classList.remove("active");
+
       document.body.style.overflow = "auto";
     }
   });
 
 
-  // UPDATE PRICE EVENTS
+
+  // =========================
+  // UPDATE PRICE
+  // =========================
+
   productType.addEventListener("change", updatePrice);
+
   quantityInput.addEventListener("input", updatePrice);
 
 
-  // UPDATE PRICE FUNCTION
+
   function updatePrice() {
 
     const product = productInput.value;
+
     const type = productType.value;
+
     const quantity = parseInt(quantityInput.value) || 1;
 
     let basePrice = 0;
 
+
+
     if (product === "Logo Design") {
-      basePrice = pricing.logoDesign?.[type];
+      basePrice = pricing.logoDesign[type];
     }
 
     if (product === "Business Card") {
@@ -329,10 +389,16 @@
       basePrice = pricing.tableCalendar[type];
     }
 
+
+
     if (!basePrice) {
+
       totalPrice.value = "";
+
       return;
     }
+
+
 
     const total = basePrice * quantity;
 
@@ -340,21 +406,47 @@
   }
 
 
+
+  // =========================
   // SUBMIT FORM
-  form.addEventListener("submit", async (e) => {
+  // =========================
+
+  form.addEventListener("submit", (e) => {
 
     e.preventDefault();
 
     const btn = form.querySelector(".submit-btn");
+
     const btnText = btn.querySelector(".btn-text");
 
-    btn.classList.add("loading");
-    btnText.textContent = "Processing...";
-    btn.disabled = true;
+
+
+    if (btn.disabled) return;
+
+
 
     const amount = parseInt(
       totalPrice.value.replace(/[₦,]/g, "")
     );
+
+
+
+    if (!amount) {
+
+      alert("Please select a product type");
+
+      return;
+    }
+
+
+
+    btn.classList.add("loading");
+
+    btn.disabled = true;
+
+    btnText.textContent = "Processing...";
+
+
 
     payWithPaystack(
       form.email.value,
@@ -365,125 +457,546 @@
         email: form.email.value,
         subject: form.subject.value,
         product: form.product.value,
-        type: productType.value,
-        quantity: quantityInput.value,
-        message: form.message.value,
-        total: totalPrice.value
+        message: form.message.value
       }
     );
+
   });
 
 
-  // PAYSTACK FUNCTION
-function payWithPaystack(email, product, amount, formData) {
 
-  let handler = PaystackPop.setup({
 
-    key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
 
-    email: email,
+  // =========================
+  // PAYSTACK
+  // =========================
 
-    amount: amount * 100,
+  function payWithPaystack(email, product, amount, formData) {
 
-    currency: "NGN",
+    let handler = PaystackPop.setup({
 
-    callback: async function(response) {
+      key: "pk_test_ea5fb3fff04a232c5ba54e50c513f31a99d84a52",
 
-      console.log("Payment successful:", response.reference);
+      email: email,
 
-      try {
+      amount: amount * 100,
 
-        const res = await fetch(
-          "https://la-tech-backend.onrender.com/send",
-          {
-            method: "POST",
+      currency: "NGN",
 
-            headers: {
-              "Content-Type": "application/json"
-            },
 
-            body: JSON.stringify({
-              ...formData,
-              paymentReference: response.reference
-            })
+
+      callback: async function (response) {
+
+        try {
+
+          const res = await fetch(
+            "https://la-tech-backend.onrender.com/send",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                ...formData,
+                paymentReference: response.reference
+              })
+            }
+          );
+
+
+
+          if (!res.ok) {
+            throw new Error("Failed to send order");
           }
-        );
 
-        if (!res.ok) {
-          throw new Error("Failed to send order");
+
+
+          successMsg.innerHTML = `
+            <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
+              ✅ Payment successful for ${product}. We will contact you shortly.
+            </div>
+          `;
+
+
+
+          successMsg.style.display = "block";
+
+
+
+          form.reset();
+
+          totalPrice.value = "";
+
+
+
+          const btn = form.querySelector(".submit-btn");
+
+          const btnText = btn.querySelector(".btn-text");
+
+
+
+          btn.classList.remove("loading");
+
+          btn.disabled = false;
+
+          btnText.textContent = "Proceed to Payment";
+
+
+
+          setTimeout(() => {
+
+            modal.classList.remove("active");
+
+            document.body.style.overflow = "auto";
+
+            successMsg.style.display = "none";
+
+          }, 3000);
+
+
+
+        } catch (err) {
+
+          console.error(err);
+
+
+
+          successMsg.innerHTML = `
+            <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
+              ❌ Payment succeeded but order failed to send.
+            </div>
+          `;
+
+
+
+          successMsg.style.display = "block";
+
+
+
+          const btn = form.querySelector(".submit-btn");
+
+          const btnText = btn.querySelector(".btn-text");
+
+
+
+          btn.classList.remove("loading");
+
+          btn.disabled = false;
+
+          btnText.textContent = "Proceed to Payment";
         }
+      },
 
-        successMsg.innerHTML = `
-          <div style="padding:15px;background:#e6ffed;color:#0f5132;border-radius:6px;">
-            ✅ Payment successful for ${product}. We will contact you shortly.
-          </div>
-        `;
 
-        successMsg.style.display = "block";
 
-        form.reset();
-
-        totalPrice.value = "";
-
-        paymentInProgress = false;
+      onClose: function () {
 
         const btn = form.querySelector(".submit-btn");
+
         const btnText = btn.querySelector(".btn-text");
 
-        btn.classList.remove("loading");
-        btn.disabled = false;
-        btnText.textContent = "Proceed to Payment";
 
-        setTimeout(() => {
-
-          modal.classList.remove("active");
-
-          document.body.style.overflow = "auto";
-
-          successMsg.style.display = "none";
-
-        }, 3000);
-
-      } catch (err) {
-
-        console.error(err);
-
-        paymentInProgress = false;
-
-        successMsg.innerHTML = `
-          <div style="padding:15px;background:#ffe6e6;color:#842029;border-radius:6px;">
-            ❌ Payment succeeded but order failed to send.
-          </div>
-        `;
-
-        successMsg.style.display = "block";
-
-        const btn = form.querySelector(".submit-btn");
-        const btnText = btn.querySelector(".btn-text");
 
         btn.classList.remove("loading");
+
         btn.disabled = false;
+
         btnText.textContent = "Proceed to Payment";
       }
-    },
+    });
 
-    onClose: function() {
 
-      paymentInProgress = false;
 
-      const btn = form.querySelector(".submit-btn");
-      const btnText = btn.querySelector(".btn-text");
+    handler.openIframe();
+  }
 
-      btn.classList.remove("loading");
-      btn.disabled = false;
-      btnText.textContent = "Proceed to Payment";
+})();
 
-      console.log("Payment window closed");
-    }
-  });
 
-  handler.openIframe();
-}
+
+
+
+
+
+
+
+// (function () {
+
+//   const modal = document.getElementById("modal");
+//   const closeBtn = document.getElementById("closeModal");
+//   const buttons = document.querySelectorAll(".order-btn");
+//   const form = document.getElementById("contactForm");
+//   const productInput = document.getElementById("productInput");
+//   const successMsg = document.getElementById("successMessage");
+
+//   const productType = document.getElementById("productType");
+//   const productMaterial = document.getElementById("productMaterial");
+//   const quantityInput = document.getElementById("quantity");
+//   const totalPrice = document.getElementById("totalPrice");
+
+//   const pricing = {
+
+//     logoDesign: {
+//       standard: 25000
+//     },
+
+//     businessCard: {
+//       singleSided300gsm50: 6000,
+//       singleSided600gsm50: 7000,
+//       doubleSided300gsm50: 8500,
+//       doubleSided600gsm50: 9500,
+//       doubleSided400gsm100: 20000
+//     },
+
+//     flyerDesignAndPrinting: {
+//       singleSidedA4_100: 43500,
+//       doubleSidedA4_100: 52300,
+
+//       singleSidedA5_100: 25800,
+//       doubleSidedA5_100: 38900,
+
+//       singleSidedA6_100: 17400,
+//       doubleSidedA6_100: 29400
+//     },
+
+//     officeLetterhead: {
+//       a4_100: 25500
+//     },
+
+//     paperBag: {
+//       a5_50: 40800,
+//       a4_100: 104800,
+//       a3_50: 171100
+//     },
+
+//     notepadDesignAndPrinting: {
+
+//       a4_soft_50: 75900,
+//       a4_hard_50: 103400,
+//       a4_perfect_50: 143400,
+
+//       a5_soft_50: 44900,
+//       a5_hard_50: 60900,
+//       a5_perfect_50: 99900
+//     },
+
+//     billboardPoster: {
+//       bigMachine: 200,
+//       smallMachine: 210,
+//       stickerBig: 210,
+//       stickerSmall: 220
+//     },
+
+//     busBrandingAndDesign: {
+//       oneWay: 22000,
+//       basic: 32000,
+//       spot: 60000,
+//       partial: 60000,
+//       full: 80000
+//     },
+
+//     poster: {
+//       poster100: 7500
+//     },
+
+//     nylonBag: {
+//       medium50: 12500,
+//       large50: 14500,
+//       xLarge50: 18500
+//     },
+
+//     rollupBanner: {
+//       smallBase: 60000,
+//       bigBase: 65000,
+//       fourFt: 140000
+//     },
+
+//     tableCalendar: {
+//       sevenSheets10: 35600,
+//       thirteenSheets10: 54400
+//     }
+//   };
+
+
+//   // OPEN MODAL
+//   buttons.forEach(btn => {
+
+//     btn.addEventListener("click", () => {
+
+//       const productName = btn.getAttribute("data-product");
+
+//       productInput.value = productName;
+
+//       form.subject.value = "Order for " + productName;
+
+//       productType.innerHTML = '<option value="">Select Type</option>';
+//       productMaterial.innerHTML = '<option value="">Select Material</option>';
+
+//       quantityInput.value = 1;
+//       totalPrice.value = "";
+
+//       // LOGO DESIGN
+//       if (productName === "Logo Design") {
+//         productType.innerHTML += `
+//           <option value="standard">Standard Logo Design</option>
+//         `;
+//       }
+
+//       // BUSINESS CARD
+//       if (productName === "Business Card") {
+
+//         productType.innerHTML += `
+//           <option value="singleSided300gsm50">Single Sided 300gsm (50)</option>
+//           <option value="singleSided600gsm50">Single Sided 600gsm (50)</option>
+//           <option value="doubleSided300gsm50">Double Sided 300gsm (50)</option>
+//           <option value="doubleSided600gsm50">Double Sided 600gsm (50)</option>
+//           <option value="doubleSided400gsm100">Double Sided 400gsm (100)</option>
+//         `;
+//       }
+
+//       // FLYERS
+//       if (productName === "Flyer Design and Printing") {
+
+//         productType.innerHTML += `
+//           <option value="singleSidedA4_100">Single A4 (100)</option>
+//           <option value="doubleSidedA4_100">Double A4 (100)</option>
+//           <option value="singleSidedA5_100">Single A5 (100)</option>
+//           <option value="doubleSidedA5_100">Double A5 (100)</option>
+//           <option value="singleSidedA6_100">Single A6 (100)</option>
+//           <option value="doubleSidedA6_100">Double A6 (100)</option>
+//         `;
+//       }
+
+//       // OFFICE LETTERHEAD
+//       if (productName === "Office Letterhead") {
+
+//         productType.innerHTML += `
+//           <option value="a4_100">A4 (100 Copies)</option>
+//         `;
+//       }
+
+//       // PAPER BAG
+//       if (productName === "Paper Bag") {
+
+//         productType.innerHTML += `
+//           <option value="a5_50">A5 (50 Copies)</option>
+//           <option value="a4_100">A4 (100 Copies)</option>
+//           <option value="a3_50">A3 (50 Copies)</option>
+//         `;
+//       }
+
+//       // NOTEPAD
+//       if (productName === "Notepad Design and Printing") {
+
+//         productType.innerHTML += `
+//           <option value="a4_soft_50">A4 Soft Cover (50)</option>
+//           <option value="a4_hard_50">A4 Hard Cover (50)</option>
+//           <option value="a4_perfect_50">A4 Perfect Binding (50)</option>
+
+//           <option value="a5_soft_50">A5 Soft Cover (50)</option>
+//           <option value="a5_hard_50">A5 Hard Cover (50)</option>
+//           <option value="a5_perfect_50">A5 Perfect Binding (50)</option>
+//         `;
+//       }
+
+//       // BILLBOARD POSTER
+//       if (productName === "Billboard Poster") {
+
+//         productType.innerHTML += `
+//           <option value="bigMachine">Big Machine per ft</option>
+//           <option value="smallMachine">Small Machine per ft</option>
+//           <option value="stickerBig">Sticker Big Machine per ft</option>
+//           <option value="stickerSmall">Sticker Small Machine per ft</option>
+//         `;
+//       }
+
+//       // BUS BRANDING
+//       if (productName === "Bus Branding and Design") {
+
+//         productType.innerHTML += `
+//           <option value="oneWay">One Way Vision</option>
+//           <option value="basic">Basic Spot Graphics</option>
+//           <option value="spot">Spot Graphics</option>
+//           <option value="partial">Partial Wrap</option>
+//           <option value="full">Full Wrap</option>
+//         `;
+//       }
+
+//       // POSTER
+//       if (productName === "Poster") {
+
+//         productType.innerHTML += `
+//           <option value="poster100">150gsm Matte (100 Copies)</option>
+//         `;
+//       }
+
+//       // NYLON BAG
+//       if (productName === "Nylon Bag") {
+
+//         productType.innerHTML += `
+//           <option value="medium50">Medium (50)</option>
+//           <option value="large50">Large (50)</option>
+//           <option value="xLarge50">X-Large (50)</option>
+//         `;
+//       }
+
+//       // ROLLUP BANNER
+//       if (productName === "Rollup Banner") {
+
+//         productType.innerHTML += `
+//           <option value="smallBase">Small Base</option>
+//           <option value="bigBase">Big Base</option>
+//           <option value="fourFt">4ft Size</option>
+//         `;
+//       }
+
+//       // TABLE CALENDAR
+//       if (productName === "Table Calendar") {
+
+//         productType.innerHTML += `
+//           <option value="sevenSheets10">7 Sheets (10 copies)</option>
+//           <option value="thirteenSheets10">13 Sheets (10 copies)</option>
+//         `;
+//       }
+
+//       modal.classList.add("active");
+//       document.body.style.overflow = "hidden";
+
+//       successMsg.style.display = "none";
+//       form.style.display = "flex";
+//     });
+//   });
+
+
+//   // CLOSE MODAL
+//   closeBtn.addEventListener("click", () => {
+
+//     modal.classList.remove("active");
+//     document.body.style.overflow = "auto";
+
+//     successMsg.style.display = "none";
+//     form.style.display = "flex";
+//   });
+
+
+//   // CLICK OUTSIDE
+//   modal.addEventListener("click", (e) => {
+
+//     if (e.target === modal) {
+//       modal.classList.remove("active");
+//       document.body.style.overflow = "auto";
+//     }
+//   });
+
+
+//   // UPDATE PRICE EVENTS
+//   productType.addEventListener("change", updatePrice);
+//   quantityInput.addEventListener("input", updatePrice);
+
+
+//   // UPDATE PRICE FUNCTION
+//   function updatePrice() {
+
+//     const product = productInput.value;
+//     const type = productType.value;
+//     const quantity = parseInt(quantityInput.value) || 1;
+
+//     let basePrice = 0;
+
+//     if (product === "Logo Design") {
+//       basePrice = pricing.logoDesign?.[type];
+//     }
+
+//     if (product === "Business Card") {
+//       basePrice = pricing.businessCard[type];
+//     }
+
+//     if (product === "Flyer Design and Printing") {
+//       basePrice = pricing.flyerDesignAndPrinting[type];
+//     }
+
+//     if (product === "Office Letterhead") {
+//       basePrice = pricing.officeLetterhead[type];
+//     }
+
+//     if (product === "Paper Bag") {
+//       basePrice = pricing.paperBag[type];
+//     }
+
+//     if (product === "Notepad Design and Printing") {
+//       basePrice = pricing.notepadDesignAndPrinting[type];
+//     }
+
+//     if (product === "Billboard Poster") {
+//       basePrice = pricing.billboardPoster[type];
+//     }
+
+//     if (product === "Bus Branding and Design") {
+//       basePrice = pricing.busBrandingAndDesign[type];
+//     }
+
+//     if (product === "Poster") {
+//       basePrice = pricing.poster[type];
+//     }
+
+//     if (product === "Nylon Bag") {
+//       basePrice = pricing.nylonBag[type];
+//     }
+
+//     if (product === "Rollup Banner") {
+//       basePrice = pricing.rollupBanner[type];
+//     }
+
+//     if (product === "Table Calendar") {
+//       basePrice = pricing.tableCalendar[type];
+//     }
+
+//     if (!basePrice) {
+//       totalPrice.value = "";
+//       return;
+//     }
+
+//     const total = basePrice * quantity;
+
+//     totalPrice.value = "₦" + total.toLocaleString();
+//   }
+
+
+//   // SUBMIT FORM
+//   form.addEventListener("submit", async (e) => {
+
+//     e.preventDefault();
+
+//     const btn = form.querySelector(".submit-btn");
+//     const btnText = btn.querySelector(".btn-text");
+
+//     btn.classList.add("loading");
+//     btnText.textContent = "Processing...";
+//     btn.disabled = true;
+
+//     const amount = parseInt(
+//       totalPrice.value.replace(/[₦,]/g, "")
+//     );
+
+//     payWithPaystack(
+//       form.email.value,
+//       form.product.value,
+//       amount,
+//       {
+//         name: form.name.value,
+//         email: form.email.value,
+//         subject: form.subject.value,
+//         product: form.product.value,
+//         type: productType.value,
+//         quantity: quantityInput.value,
+//         message: form.message.value,
+//         total: totalPrice.value
+//       }
+//     );
+//   });
+
+
+//   // PAYSTACK FUNCTION
 
 //   function payWithPaystack(email, product, amount, formData) {
 
