@@ -626,11 +626,6 @@ Form style start
   color:#000;
 }
 
-#productMaterial:empty,
-#productType:empty{
-  display:none;
-}
-
 /*
 Form style end
 */
@@ -1563,10 +1558,10 @@ div.contact-cover .contact-cover-text  h6 {
   }
 
   .modal-content{
-    margin-top: 20px;
-    margin-bottom: 20px;
     max-height: 85vh;
     overflow-y: auto;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
   }
 }
 
