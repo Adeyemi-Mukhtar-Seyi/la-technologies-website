@@ -462,7 +462,7 @@
     );
 
   });
-})
+})()
 
 
 
@@ -473,6 +473,10 @@
   // =========================
 
   function payWithPaystack(email, product, amount, formData) {
+        const form = document.getElementById("contactForm");
+        const modal = document.getElementById("modal");
+        const successMsg = document.getElementById("successMessage");
+        const totalPrice = document.getElementById("totalPrice");
 
         const btn = form.querySelector(".submit-btn");
         const btnText = btn.querySelector(".btn-text");
