@@ -515,15 +515,18 @@ Form style start
 /* MODAL BACKGROUND */
 #modal {
   position: fixed;
+   inset: 0;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.7);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
+   padding: 20px;
   z-index: 9999;
+   overflow-y: auto;
 }
 
 #modal.active {
@@ -533,11 +536,13 @@ Form style start
 /* MODAL BOX */
 .modal-content {
   background: #fff;
-  width: 90%;
+  width: 100%;
   max-width: 420px;
   padding: 20px;
   border-radius: 10px;
   position: relative;
+    max-height: 90vh;
+  overflow-y: auto;
 }
 
 /* CLOSE BUTTON */
@@ -558,7 +563,7 @@ Form style start
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 /* INPUTS */
@@ -622,6 +627,14 @@ Form style start
   color:#000;
 }
 
+.modal-content::-webkit-scrollbar{
+  width: 5px;
+}
+
+.modal-content::-webkit-scrollbar-thumb{
+  background: #ff6600;
+  border-radius: 10px;
+}
 
 /*
 Form style end
@@ -1518,37 +1531,50 @@ div.contact-cover .contact-cover-text  h6 {
     }
 
 
- /*Contact section*/
-.contact-info h2 {
-    font-size: 28px;
-  }
+    /*Contact section*/
+    .contact-info h2 {
+        font-size: 28px;
+      }
 
-  .map-container {
-    height: 300px;
-  }
-.contact-section {
-  text-align: center;
-  padding: 60px 20px;
-}
+      .map-container {
+        height: 300px;
+      }
+    .contact-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
 
-div.contact-cover .contact-cover-text h1 {
-  font-size: 50px;
-  margin-top: 1.5rem;
-  color: #000000;
-}
+    div.contact-cover .contact-cover-text h1 {
+      font-size: 50px;
+      margin-top: 1.5rem;
+      color: #000000;
+    }
 
-div.contact-cover .contact-cover-text h3 {
-    font-size: 20px;
-    margin-bottom: 0.5rem;
-    color: #555353;
-}
+    div.contact-cover .contact-cover-text h3 {
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+        color: #555353;
+    }
 
 
-div.contact-cover .contact-cover-text  h6 {
-    text-decoration: none;
-    color: #2b2a2a;
-    font-size: 20px;
-}
+    div.contact-cover .contact-cover-text  h6 {
+        text-decoration: none;
+        color: #2b2a2a;
+        font-size: 20px;
+    }
+
+    /* form style mobile */
+
+    #modal{
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+    .modal-content{
+        max-height: unset;
+        min-height: auto;
+      }
 }
 
 @media (max-width:390px) {
