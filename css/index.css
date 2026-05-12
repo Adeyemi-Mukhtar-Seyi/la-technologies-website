@@ -520,11 +520,9 @@ Form style start
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.7);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
-  padding: 15px;
   z-index: 9999;
 }
 
@@ -537,9 +535,7 @@ Form style start
   background: #fff;
   width: 90%;
   max-width: 420px;
-  padding: 20px;
-  max-height: 90vh;
-  overflow-y: auto;
+  padding: 50px;
   border-radius: 10px;
   position: relative;
 }
@@ -1553,16 +1549,6 @@ div.contact-cover .contact-cover-text  h6 {
     font-size: 20px;
 }
 
-#modal{
-    align-items: flex-start;
-  }
-
-  .modal-content{
-    max-height: 85vh;
-    overflow-y: auto;
-    /* margin-top: 20px;
-    margin-bottom: 20px; */
-  }
 }
 
 @media (max-width:390px) {
