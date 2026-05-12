@@ -504,13 +504,6 @@ Form style start
 
 /* ===== MODAL BOX ===== */
 
-/* #modal,
-#modal * {
-  all: unset;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-} */
-
 /* MODAL BACKGROUND */
 #modal {
   position: fixed;
@@ -534,37 +527,16 @@ Form style start
   display: flex;
 }
 
-/* MODAL BOX */
 .modal-content {
   background: #fff;
-
   width: 90%;
   max-width: 420px;
-
   padding: 20px;
-
   border-radius: 10px;
-
   position: relative;
-
   margin: auto;
   transform: scale(.95);
   transform-origin: top center;
-
-  /* background: #fff;
-
-  width: 90%;
-  max-width: 420px;
-
-  padding: 30px;
-
-  border-radius: 10px;
-
-  position: relative;
-
-  margin: 0 auto;
-
-  max-height: unset; */
 }
 
 
@@ -572,7 +544,6 @@ body.modal-open{
   overflow:hidden;
 }
 
-/* CLOSE BUTTON */
 .modal-close {
   position: absolute;
   top: 10px;
@@ -593,7 +564,6 @@ body.modal-open{
   gap: 8px;
 }
 
-/* INPUTS */
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -602,12 +572,14 @@ body.modal-open{
   border-radius: 5px;
 }
 
-/* TEXTAREA */
+.material-group{
+    display: none !important;
+}
+
 .contact-form textarea {
   min-height: 70px;
 }
 
-/* BUTTON */
 .submit-btn {
   background: #ff6600;
   color: #fff;
@@ -618,7 +590,6 @@ body.modal-open{
   font-weight: bold;
 }
 
-/* SUCCESS */
 .success-message {
   display: none;
   background: #e6ffed;
