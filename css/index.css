@@ -572,10 +572,6 @@ body.modal-open{
   border-radius: 5px;
 }
 
-.material-group{
-    display: none !important;
-}
-
 .contact-form textarea {
   min-height: 70px;
 }
@@ -617,6 +613,10 @@ body.modal-open{
 .form-group select,
 .form-group input{
   width:100%;
+}
+
+.material-group{
+    display: none;
 }
 
 #totalPrice{
